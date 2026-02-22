@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Physics | SnapLearn CEMK</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">← <span>Physics</span></a>
+  <button class="theme-btn" id="themeBtn">☀️</button>
+</header>
+
+<div class="topic-nav">
+  <a href="#shm"          class="tpill">⚙️ Mechanics</a>
+  <a href="#interference" class="tpill">💡 Optics</a>
+  <a href="#em"           class="tpill">🧲 EM</a>
+  <a href="#pib"          class="tpill">🔬 Quantum</a>
+  <a href="#stat"         class="tpill">📊 Statistical</a>
+</div>
+
+<div class="container">
+
+<!-- ══════════════════════════════════════════
+     MECHANICS
+══════════════════════════════════════════ -->
+<div class="section" id="mechanics">
+<div class="sec-title">⚙️ Mechanics</div>
+
+<!-- SHM -->
+<div class="collap" id="shm">
+  <div class="collap-hd">Simple Harmonic Motion (SHM) <span class="collap-arrow">▼</span></div>
+  <div class="collap-bd">
+    <div class="row mb10"><span class="tag tag-exam">⭐ Exam Fav</span><span class="tag tag-vis">🎬 Animation</span></div>
+    <p class="sm muted mb10">SHM is periodic motion where restoring force ∝ −displacement. Spring-mass and pendulum are classic examples. Energy alternates between KE and PE.</p>
+
+    <button class="btn btn-purple btn-sm" data-eli5="eli5shm">🧠 Explain Like I'm Weak</button>
+    <div class="eli5" id="eli5shm">
+      <div class="eli5-head">🧠 Super Simple</div>
+      <p>Imagine a ball on a spring. Pull it and let go — it bounces up and down forever (without friction). The spring ALWAYS pulls it back to middle. More you pull = faster it bounces. That's SHM!</p>
+    </div>
+
+    <div class="formula">x(t) = A·cos(ωt + φ)
+ω = √(k/m)  →  T = 2π/ω = 2π√(m/k)
+KE = ½mω²(A²−x²)  |  PE = ½mω²x²
+Total E = ½mω²A² = ½kA²  [constant]</div>
+
+    <button class="btn btn-primary btn-sm" data-vis="vSHM">🎬 Visualize — Animated Spring</button>
+    <div class="vis-wrap" id="vSHM">
+      <canvas data-h="230"></canvas>
+      <div class="vis-ctrl">
+        <label>Amplitude</label>
+        <input type="range" id="shmA" min="20" max="75" value="50">
+        <label>Freq</label>
+        <input type="range" id="shmF" min="5" max="25" value="12">
+      </div>
+      <div class="vis-info" id="shmInfo"></div>
+    </div>
+
+    <div class="divider"></div>
+    <div id="qSHM"></div>
+  </div>
+</div>
+
+<!-- DAMPED -->
+<div class="collap">
+  <div class="collap-hd">Damped &amp; Forced Oscillations <span class="collap-arrow">▼</span></div>
+  <div class="collap-bd">
+    <div class="row mb10"><span class="tag tag-exam">⭐ Important</span></div>
+    <p class="sm muted mb10">Real oscillations lose energy to friction — amplitude decreases exponentially. At resonance (forced), amplitude is maximum when driving frequency = natural frequency.</p>
+
+    <button class="btn btn-purple btn-sm" data-eli5="eli5damp">🧠 Explain Like I'm Weak</button>
+    <div class="eli5" id="eli5damp">
+      <div class="eli5-head">🧠 Super Simple</div>
+      <p>SHM in water = damped (slows down). Pushing a swing = forced. Push at EXACT right moment every time = resonance — swing goes VERY high! Bridges collapse this way (Tacoma Narrows).</p>
+    </div>
+
+    <div class="formula">Damped:  x(t) = A·e^(−bt/2m)·cos(ω't)
+ω' = √(ω₀² − b²/4m²)
+Q = mω₀/b  [Quality factor]
+Resonance: ω_drive = ω₀</div>
+
+    <button class="btn btn-primary btn-sm" data-vis="vDAMP">🎬 Visualize — 3 Damping Types</button>
+    <div class="vis-wrap" id="vDAMP">
+      <canvas data-h="200"></canvas>
+      <div class="vis-ctrl">
+        <label>Damping b</label>
+        <input type="range" id="dampB" min="1" max="40" value="8">
+        <span id="dampLbl" style="font-weight:700;color:var(--orange)">8</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div><!-- /mechanics -->
+
+<!-- ══════════════════════════════════════════
+     OPTICS
+══════════════════════════════════════════ -->
+<div class="section" id="interference">
+<div class="sec-title">💡 Optics</div>
+
+<!-- INTERFERENCE -->
+<div class="collap">
+  <div class="collap-hd">Interference &amp; Diffraction <span class="collap-arrow">▼</span></div>
+  <div class="collap-bd">
+    <div class="row mb10"><span class="tag tag-exam">⭐ Exam Fav</span><span class="tag tag-vis">🎬 Animation</span></div>
+    <p class="sm muted mb10">Two coherent waves overlap → bright and dark fringes (interference). Light through narrow slit bends and spreads (diffraction). Young's double slit is the classic exam experiment.</p>
+
+    <button class="btn btn-purple btn-sm" data-eli5="eli5int">🧠 Explain Like I'm Weak</button>
+    <div class="eli5" id="eli5int">
+      <div class="eli5-head">🧠 Super Simple</div>
+      <p>Drop two stones in a pond → ripples meet → some places ADD UP (bright), some CANCEL (dark). That's interference! Diffraction = wave going through a tiny gap spreads like a fan.</p>
+    </div>
+
+    <div class="formula">Fringe width:  β = λD/d
+Bright: d·sinθ = nλ  (n=0,±1,±2…)
+Dark:   d·sinθ = (2n−1)λ/2
+Single slit min: a·sinθ = nλ
+Rayleigh:  θ_min = 1.22λ/D</div>
+
+    <button class="btn btn-primary btn-sm" data-vis="vINT">🎬 Visualize — Double Slit</button>
+    <div class="vis-wrap" id="vINT">
+      <canvas data-h="240"></canvas>
+      <div class="vis-ctrl">
+        <label>λ (nm)</label>
+        <input type="range" id="intL" min="380" max="700" value="550">
+        <span id="intLbl" style="font-weight:700">550nm</span>
+        <label>Slit sep d</label>
+        <input type="range" id="intD" min="1" max="12" value="4">
+      </div>
+      <div class="vis-info" id="intInfo"></div>
+    </div>
+
+    <div class="divider"></div>
+    <div id="qOPT"></div>
+  </div>
+</div>
+
+<!-- POLARISATION -->
+<div class="collap">
+  <div class="collap-hd">Polarisation of Light <span class="collap-arrow">▼</span></div>
+  <div class="collap-bd">
+    <div class="row mb10"><span class="tag tag-exam">⭐ Exam</span></div>
+    <p class="sm muted mb10">Normal light vibrates in ALL planes. A polariser lets only one plane through. Rotating a second (analyser) polariser changes intensity by Malus's Law.</p>
+
+    <button class="btn btn-purple btn-sm" data-eli5="eli5pol">🧠 Explain Like I'm Weak</button>
+    <div class="eli5" id="eli5pol">
+      <div class="eli5-head">🧠 Super Simple</div>
+      <p>Light waves vibrate in all directions. Polariser = fence with vertical slots. Only vertical vibrations pass. Sunglasses use this! Rotating second filter reduces brightness → I = I₀cos²θ</p>
+    </div>
+
+    <div class="formula or">Malus's Law:  I = I₀·cos²θ
+Brewster's angle:  tanθ_B = n₂/n₁
+Reflected light fully polarised at θ_B</div>
+
+    <button class="btn btn-primary btn-sm" data-vis="vPOL">🎬 Visualize — Malus's Law</button>
+    <div class="vis-wrap" id="vPOL">
+      <canvas data-h="200"></canvas>
+      <div class="vis-ctrl">
+        <label>Analyser angle θ</label>
+        <input type="range" id="polA" min="0" max="360" value="0">
+        <span id="polLbl" style="font-weight:700;color:var(--purple)">0°</span>
+      </div>
+      <div class="vis-info" id="polInfo"></div>
+    </div>
+  </div>
+</div>
+
+<!-- LASER -->
+<div class="collap" id="laser">
+  <div class="collap-hd">Lasers — Population Inversion &amp; Stimulated Emission <span class="collap-arrow">▼</span></div>
+  <div class="collap-bd">
+    <div class="row mb10"><span class="tag tag-exam">⭐ Exam</span></div>
+    <p class="sm muted mb10">Laser = Light Amplification by Stimulated Emission of Radiation. Requires population inversion: more atoms in excited state than ground state. A photon triggers a chain reaction of identical photons.</p>
+
+    <button class="btn btn-purple btn-sm" data-eli5="eli5laser">🧠 Explain Like I'm Weak</button>
+    <div class="eli5" id="eli5laser">
+      <div class="eli5-head">🧠 Super Simple</div>
+      <p>Normally atoms like being calm (ground state). Pump energy → atoms get excited. One photon hits → triggers another → triggers more → CHAIN REACTION of identical photons bouncing in cavity → LASER!</p>
+    </div>
+
+    <div class="formula pu">Population inversion: N₂ > N₁
+Stimulated emission rate ∝ N₂·B₂₁·ρ
+Threshold: N₂ − N₁ > 0
+Types: Ruby (solid), He-Ne (gas), Semiconductor</div>
+
+    <button class="btn btn-primary btn-sm" data-vis="vLASER">🎬 Visualize — Photon Chain Reaction</button>
+    <div class="vis-wrap" id="vLASER">
+      <canvas data-h="200"></canvas>
+    </div>
+  </div>
+</div>
+</div><!-- /optics -->
+
+<!-- ══════════════════════════════════════════
+     ELECTROMAGNETISM
+══════════════════════════════════════════ -->
+<div class="section" id="em">
+<div class="sec-title">🧲 Electromagnetism</div>
+
+<div class="collap">
+  <div class="collap-hd">Maxwell's Equations &amp; Field Lines <span class="collap-arrow">▼</span></div>
+  <div class="collap-bd">
+    <div class="row mb10"><span class="tag tag-exam">⭐ Exam</span><span class="tag tag-vis">🎬 Animation</span></div>
+    <p class="sm muted mb10">Maxwell's 4 equations describe all classical EM phenomena. Together they predict electromagnetic waves (light). E-field lines go from + to −. B-field lines form closed loops around current.</p>
+
+    <button class="btn btn-purple btn-sm" data-eli5="eli5em">🧠 Explain Like I'm Weak</button>
+    <div class="eli5" id="eli5em">
+      <div class="eli5-head">🧠 Super Simple</div>
+      <p>Electric field = invisible arrows from + charges to − charges. Magnetic field = circles around current wires. Maxwell said: changing E makes B, changing B makes E → together they make LIGHT (EM wave)!</p>
+    </div>
+
+    <div class="formula">∇·E = ρ/ε₀         [Gauss — E]
+∇·B = 0             [No magnetic monopole]
+∇×E = −∂B/∂t       [Faraday]
+∇×B = μ₀J + μ₀ε₀∂E/∂t  [Ampere-Maxwell]
+EM wave speed: c = 1/√(μ₀ε₀)</div>
+
+    <button class="btn btn-primary btn-sm" data-vis="vEFIELD">🎬 Visualize — Electric Field Lines</button>
+    <div class="vis-wrap" id="vEFIELD">
+      <canvas data-h="250"></canvas>
+      <div class="vis-ctrl">
+        <label>Config</label>
+        <select id="efType">
+          <option value="dipole">Dipole (+−)</option>
+          <option value="plus">Single + charge</option>
+          <option value="minus">Single − charge</option>
+          <option value="twoplus">Two + charges</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="collap">
+  <div class="collap-hd">Magnetic Hysteresis (B-H Curve) <span class="collap-arrow">▼</span></div>
+  <div class="collap-bd">
+    <div class="row mb10"><span class="tag tag-exam">⭐ Exam</span></div>
+    <p class="sm muted mb10">The B-H curve shows how a ferromagnetic material magnetises. Hysteresis = the loop area = energy lost per cycle. Retentivity = residual B, Coercivity = H needed to demagnetise.</p>
+    <div class="formula or">B = μH = μ₀μᵣH
+Retentivity: B when H=0
+Coercivity: H when B=0
+Hysteresis loss ∝ loop area × frequency</div>
+    <button class="btn btn-primary btn-sm" data-vis="vBH">🎬 Visualize — B-H Hysteresis Loop</button>
+    <div class="vis-wrap" id="vBH">
+      <canvas data-h="210"></canvas>
+    </div>
+  </div>
+</div>
+</div><!-- /em -->
+
+<!-- ══════════════════════════════════════════
+     QUANTUM MECHANICS
+══════════════════════════════════════════ -->
+<div class="section" id="pib">
+<div class="sec-title">🔬 Quantum Mechanics <span class="tag tag-hot">Most Marks</span></div>
+
+<div class="collap">
+  <div class="collap-hd">Black Body Radiation &amp; Planck's Law <span class="collap-arrow">▼</span></div>
+  <div class="collap-bd">
+    <div class="row mb10"><span class="tag tag-exam">⭐ Exam</span></div>
+    <p class="sm muted mb10">Classical physics predicted infinite energy at high frequencies (UV catastrophe). Planck fixed it by saying energy is quantised: E = hf. This started quantum mechanics!</p>
+    <div class="formula">Planck: B(f,T) = (2hf³/c²) · 1/(e^(hf/kT)−1)
+Wien's law:  λ_max = b/T  (b = 2.898×10⁻³ m·K)
+Stefan-Boltzmann:  P = σAT⁴
+Photon energy: E = hf = hc/λ</div>
+    <button class="btn btn-primary btn-sm" data-vis="vBB">🎬 Visualize — Planck Curves</button>
+    <div class="vis-wrap" id="vBB">
+      <canvas data-h="210"></canvas>
+      <div class="vis-ctrl">
+        <label>Temperature T (K)</label>
+        <input type="range" id="bbT" min="2000" max="8000" value="4000" step="200">
+        <span id="bbLbl" style="font-weight:700;color:var(--orange)">4000K</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="collap">
+  <div class="collap-hd">de Broglie &amp; Wave-Particle Duality <span class="collap-arrow">▼</span></div>
+  <div class="collap-bd">
+    <div class="row mb10"><span class="tag tag-exam">⭐ Important</span></div>
+    <p class="sm muted mb10">Every particle has a wave nature with wavelength λ = h/p. At atomic scales this matters enormously — electrons diffract just like light!</p>
+    <div class="formula">de Broglie: λ = h/p = h/mv
+Compton shift: Δλ = (h/m_e c)(1 − cosθ)
+Uncertainty: Δx·Δp ≥ ℏ/2
+            ΔE·Δt ≥ ℏ/2</div>
+  </div>
+</div>
+
+<!-- PARTICLE IN BOX — MAIN VISUALIZATION -->
+<div class="collap">
+  <div class="collap-hd">⭐ Particle in a Box — MOST EXAM ASKED <span class="collap-arrow">▼</span></div>
+  <div class="collap-bd">
+    <div class="row mb10"><span class="tag tag-hot">🔥 Very Hot</span><span class="tag tag-vis">🎬 Animation</span></div>
+    <p class="sm muted mb10">Electron trapped in infinite potential well. Only certain standing wave patterns fit → quantised energy levels. |Ψ|² tells where you'll find the electron.</p>
+
+    <button class="btn btn-purple btn-sm" data-eli5="eli5pib">🧠 Explain Like I'm Weak</button>
+    <div class="eli5" id="eli5pib">
+      <div class="eli5-head">🧠 Super Simple</div>
+      <p>Electron locked in tiny box. It's a wave bouncing inside! Only certain "notes" (like guitar string) are allowed — these are quantum numbers n=1,2,3… More nodes = higher energy. |Ψ|² = chance of FINDING electron at a spot.</p>
+    </div>
+
+    <div class="formula pu">Ψₙ(x) = √(2/L)·sin(nπx/L)
+Eₙ = n²π²ℏ²/(2mL²) = n²E₁
+E₁ = π²ℏ²/(2mL²)  [ground state]
+Eₙ = n²E₁  →  E₂=4E₁, E₃=9E₁, …
+n = 1,2,3,…  (n=0 not allowed!)</div>
+
+    <button class="btn btn-primary btn-sm" data-vis="vPIB">🎬 Visualize — Wavefunction &amp; Probability</button>
+    <div class="vis-wrap" id="vPIB">
+      <canvas data-h="240"></canvas>
+      <div class="vis-ctrl">
+        <label>Quantum number n =</label>
+        <input type="range" id="pibN" min="1" max="6" value="1" step="1">
+        <span id="pibNlbl" style="font-weight:700;color:var(--purple);font-size:1.1rem">1</span>
+        <label>Show:</label>
+        <select id="pibShow">
+          <option value="psi">Ψ — Wavefunction</option>
+          <option value="prob">|Ψ|² — Probability</option>
+          <option value="both">Both</option>
+        </select>
+      </div>
+      <div class="vis-info" id="pibInfo"></div>
+    </div>
+
+    <div class="divider"></div>
+    <div id="qQM"></div>
+  </div>
+</div>
+
+<div class="collap">
+  <div class="collap-hd">Hydrogen Atom — Bohr Model <span class="collap-arrow">▼</span></div>
+  <div class="collap-bd">
+    <div class="row mb10"><span class="tag tag-exam">⭐ Exam</span><span class="tag tag-vis">🎬 Animation</span></div>
+    <p class="sm muted mb10">Electron orbits nucleus in fixed energy shells. Jumping down shells releases a photon. Jumping up absorbs one. This explains hydrogen's spectral lines!</p>
+
+    <div class="formula">Eₙ = −13.6/n² eV
+rₙ = n²·a₀  (a₀ = 0.529 Å)
+L = nℏ  [quantised angular momentum]
+Rydberg: 1/λ = R_H(1/n₁² − 1/n₂²)
+R_H = 1.097 × 10⁷ m⁻¹</div>
+
+    <button class="btn btn-primary btn-sm" data-vis="vHYDRO">🎬 Visualize — Bohr Orbits</button>
+    <div class="vis-wrap" id="vHYDRO">
+      <canvas data-h="260"></canvas>
+      <div class="vis-ctrl">
+        <label>Orbit n =</label>
+        <input type="range" id="hydroN" min="1" max="5" value="2" step="1">
+        <span id="hydroNlbl" style="font-weight:700;color:var(--blue)">2</span>
+      </div>
+      <div class="vis-info" id="hydroInfo"></div>
+    </div>
+  </div>
+</div>
+</div><!-- /quantum -->
+
+<!-- ══════════════════════════════════════════
+     STATISTICAL MECHANICS
+══════════════════════════════════════════ -->
+<div class="section" id="stat">
+<div class="sec-title">📊 Statistical Mechanics</div>
+
+<div class="collap">
+  <div class="collap-hd">Maxwell-Boltzmann Speed Distribution <span class="collap-arrow">▼</span></div>
+  <div class="collap-bd">
+    <div class="row mb10"><span class="tag tag-exam">⭐ Exam</span><span class="tag tag-vis">🎬 Animation</span></div>
+    <p class="sm muted mb10">Not all gas molecules move at the same speed. The MB distribution gives the probability of finding a molecule at speed v. Higher temperature → distribution shifts right and flattens.</p>
+
+    <button class="btn btn-purple btn-sm" data-eli5="eli5mb">🧠 Explain Like I'm Weak</button>
+    <div class="eli5" id="eli5mb">
+      <div class="eli5-head">🧠 Super Simple</div>
+      <p>Imagine gas molecules as racing people. Some are slow, some fast. The graph is a hill — peak = most common speed. Hot gas = hill moves right (faster molecules). Three special speeds: v_mp (peak), v_avg, v_rms.</p>
+    </div>
+
+    <div class="formula gr">f(v) = 4π(m/2πkT)^(3/2) · v² · e^(−mv²/2kT)
+v_mp  = √(2kT/m)    [most probable]
+v_avg = √(8kT/πm)   [average]
+v_rms = √(3kT/m)    [RMS — used in KE]
+KE_avg = (3/2)kT</div>
+
+    <button class="btn btn-primary btn-sm" data-vis="vMB">🎬 Visualize — MB Distribution</button>
+    <div class="vis-wrap" id="vMB">
+      <canvas data-h="210"></canvas>
+      <div class="vis-ctrl">
+        <label>Temperature T (K)</label>
+        <input type="range" id="mbT" min="100" max="2000" value="400" step="50">
+        <span id="mbLbl" style="font-weight:700;color:var(--green)">400K</span>
+      </div>
+      <div class="vis-info" id="mbInfo"></div>
+    </div>
+  </div>
+</div>
+
+<div class="collap">
+  <div class="collap-hd">Fermi-Dirac &amp; Bose-Einstein Statistics <span class="collap-arrow">▼</span></div>
+  <div class="collap-bd">
+    <div class="row mb10"><span class="tag tag-exam">⭐ Exam</span></div>
+    <p class="sm muted mb10">MB: for distinguishable particles (classical). FD: for electrons, protons (fermions — obey Pauli exclusion). BE: for photons, phonons (bosons — can share states).</p>
+    <div class="formula">Fermi-Dirac:  f(E) = 1/[e^((E−μ)/kT) + 1]
+Bose-Einstein: n(E) = 1/[e^((E−μ)/kT) − 1]
+Maxwell-Bolt.: n(E) ∝ e^(−E/kT)
+At T→0: FD is a step function at E_F</div>
+    <button class="btn btn-primary btn-sm" data-vis="vFD">🎬 Visualize — All 3 Distributions</button>
+    <div class="vis-wrap" id="vFD">
+      <canvas data-h="210"></canvas>
+      <div class="vis-ctrl">
+        <label>Temperature T (K)</label>
+        <input type="range" id="fdT" min="100" max="2000" value="500" step="50">
+        <span id="fdLbl" style="font-weight:700;color:var(--blue)">500K</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /stat -->
+</div><!-- /container -->
+
+<nav class="bnav">
+  <a href="index.html" class="bnav-item"><span class="ni">🏠</span><span>Home</span></a>
+  <a href="physics.html" class="bnav-item active"><span class="ni">⚛️</span><span>Physics</span></a>
+  <a href="math.html" class="bnav-item"><span class="ni">📐</span><span>Maths</span></a>
+  <a href="electrical.html" class="bnav-item"><span class="ni">⚡</span><span>Electrical</span></a>
+</nav>
+
+<script src="script.js"></script>
+<script>
+/* ============================================================
+   PHYSICS VISUALIZATIONS
+   Each registered as: window.VIS["containerID"] = fn(canvas, wrap)
+   canvas.width and canvas.height are set BEFORE fn is called
+============================================================ */
+
+// ── SHM Spring-Mass ──────────────────────────────────────────
+window.VIS["vSHM"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  let t = 0, rafId;
+  if (wrap._animId) cancelAnimationFrame(wrap._animId);
+
+  const amp  = () => parseInt(document.getElementById('shmA').value);
+  const freq = () => parseInt(document.getElementById('shmF').value) / 100;
+
+  function drawSpring(x0, y, x1) {
+    const coils = 10, h = 8;
+    const len = x1 - x0;
+    ctx.beginPath();
+    ctx.moveTo(x0, y);
+    for (let i = 0; i <= coils; i++) {
+      const px = x0 + (len * i) / coils;
+      const py = y + (i % 2 === 0 ? 0 : (i % 4 < 2 ? h : -h));
+      ctx.lineTo(px, py);
+    }
+    ctx.lineTo(x1, y);
+    ctx.strokeStyle = '#8b949e'; ctx.lineWidth = 1.5; ctx.stroke();
+  }
+
+  function frame() {
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, W, H);
+    grid(ctx, W, H);
+
+    const A = amp(), f = freq();
+    const cx = W * 0.18;
+    const cy = H * 0.42;
+    const bx = cx + A * Math.cos(f * t);
+
+    // Wall
+    ctx.fillStyle = '#30363d';
+    ctx.fillRect(0, cy - 50, 6, 100);
+
+    // Spring
+    drawSpring(6, cy, bx - 14);
+
+    // Equilibrium dotted
+    ctx.setLineDash([4, 4]);
+    ctx.strokeStyle = 'rgba(255,255,255,0.12)';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(6, cy); ctx.lineTo(cx + A + 40, cy); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Ball
+    const gradient = ctx.createRadialGradient(bx, cy - 3, 2, bx, cy, 16);
+    gradient.addColorStop(0, '#89c4ff');
+    gradient.addColorStop(1, '#1560bd');
+    ctx.beginPath(); ctx.arc(bx, cy, 16, 0, Math.PI * 2);
+    ctx.fillStyle = gradient; ctx.fill();
+    ctx.fillStyle = '#fff'; ctx.font = 'bold 9px sans-serif';
+    ctx.textAlign = 'center'; ctx.fillText('m', bx, cy + 3);
+
+    // x-t graph (right side)
+    const gx0 = W * 0.52, gw = W * 0.44, gy0 = H * 0.15, gh = H * 0.7;
+    const gcy = gy0 + gh / 2;
+    ctx.strokeStyle = '#2a3040'; ctx.lineWidth = 1;
+    ctx.strokeRect(gx0, gy0, gw, gh);
+    ctx.fillStyle = '#8b949e'; ctx.font = '9px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('x(t) = A cos(ωt)', gx0 + gw / 2, gy0 - 4);
+
+    ctx.beginPath(); ctx.strokeStyle = '#58a6ff'; ctx.lineWidth = 2;
+    for (let px = 0; px < gw; px++) {
+      const tt = t - (gw - px) * 0.04;
+      const y = gcy - A * 0.55 * Math.cos(f * tt);
+      px === 0 ? ctx.moveTo(gx0 + px, y) : ctx.lineTo(gx0 + px, y);
+    }
+    ctx.stroke();
+
+    // Moving dot on graph
+    const dotY = gcy - A * 0.55 * Math.cos(f * t);
+    ctx.beginPath(); ctx.arc(gx0 + gw - 2, dotY, 4, 0, Math.PI * 2);
+    ctx.fillStyle = '#58a6ff'; ctx.fill();
+
+    // Info
+    document.getElementById('shmInfo').textContent =
+      `A = ${A}px | ω = ${(f * 100).toFixed(0)} | x = ${(A * Math.cos(f * t)).toFixed(1)}`;
+
+    t += 0.8;
+    wrap._animId = rafId = requestAnimationFrame(frame);
+  }
+  frame();
+};
+
+// ── Damped Oscillation ─────────────────────────────────────
+window.VIS["vDAMP"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cy = H / 2;
+
+  const bl = document.getElementById('dampB');
+  function draw() {
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, W, H);
+    grid(ctx, W, H);
+    const b = parseFloat(bl.value) / 100;
+    document.getElementById('dampLbl').textContent = bl.value;
+
+    // Underdamped
+    ctx.beginPath(); ctx.strokeStyle = '#3fb950'; ctx.lineWidth = 2;
+    for (let px = 0; px < W; px++) {
+      const tt = (px / W) * 5 * Math.PI;
+      const y = cy - 75 * Math.exp(-b * tt) * Math.cos(2.5 * tt);
+      px === 0 ? ctx.moveTo(px, y) : ctx.lineTo(px, y);
+    }
+    ctx.stroke();
+
+    // Critically damped (b such that β=ω₀)
+    ctx.beginPath(); ctx.strokeStyle = '#f0883e'; ctx.lineWidth = 2;
+    for (let px = 0; px < W; px++) {
+      const tt = (px / W) * 5 * Math.PI;
+      const y = cy - 75 * (1 + 2.5 * tt) * Math.exp(-2.5 * tt);
+      if (isFinite(y) && Math.abs(y - cy) < H) { px === 0 ? ctx.moveTo(px, y) : ctx.lineTo(px, y); }
+    }
+    ctx.stroke();
+
+    // Overdamped
+    ctx.beginPath(); ctx.strokeStyle = '#f85149'; ctx.lineWidth = 2;
+    const a2 = 0.4;
+    for (let px = 0; px < W; px++) {
+      const tt = (px / W) * 5 * Math.PI;
+      const y = cy - 75 * Math.exp(-a2 * tt);
+      px === 0 ? ctx.moveTo(px, y) : ctx.lineTo(px, y);
+    }
+    ctx.stroke();
+
+    // Legend
+    const items = [['Underdamped (oscillates)', '#3fb950'], ['Critically damped (fastest)', '#f0883e'], ['Overdamped (slow)', '#f85149']];
+    items.forEach(([txt, col], i) => {
+      ctx.fillStyle = col; ctx.fillRect(10, 12 + i * 16, 12, 3);
+      ctx.fillStyle = col; ctx.font = '10px sans-serif'; ctx.textAlign = 'left';
+      ctx.fillText(txt, 28, 17 + i * 16);
+    });
+    ctx.fillStyle = '#8b949e'; ctx.font = '9px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('Time →', W / 2, H - 6);
+  }
+  draw();
+  bl.oninput = draw;
+};
+
+// ── Interference / Double Slit ──────────────────────────────
+window.VIS["vINT"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+
+  function wl2rgb(λ) {
+    let r = 0, g = 0, b = 0;
+    if (λ >= 380 && λ < 440) { r = (440-λ)/60; b = 1; }
+    else if (λ < 490) { g = (λ-440)/50; b = 1; }
+    else if (λ < 510) { g = 1; b = (510-λ)/20; }
+    else if (λ < 580) { r = (λ-510)/70; g = 1; }
+    else if (λ < 645) { r = 1; g = (645-λ)/65; }
+    else { r = 1; }
+    return [Math.round(r*255), Math.round(g*255), Math.round(b*255)];
+  }
+
+  function draw() {
+    const W = canvas.width, H = canvas.height;
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, W, H);
+
+    const lambda = parseInt(document.getElementById('intL').value);
+    const d = parseInt(document.getElementById('intD').value);
+    document.getElementById('intLbl').textContent = lambda + 'nm';
+    const [r, g, b] = wl2rgb(lambda);
+
+    // Intensity pattern on right
+    const patX = Math.round(W * 0.5);
+    const patW = W - patX - 10;
+    const D = 500;
+    for (let py = 0; py < H; py++) {
+      const y = (py - H / 2) * 0.3;
+      const theta = Math.atan2(y, D);
+      const phase = (Math.PI * d * Math.sin(theta)) / (lambda / 500);
+      const I = Math.pow(Math.cos(phase), 2);
+      ctx.fillStyle = `rgba(${r},${g},${b},${I * 0.9})`;
+      ctx.fillRect(patX, py, patW, 1);
+    }
+
+    // Slits (barrier)
+    const slitX = Math.round(W * 0.3);
+    const slitH = 18;
+    const slitGap = d * 4 + 20;
+    ctx.fillStyle = '#21262d';
+    ctx.fillRect(slitX - 3, 0, 7, H / 2 - slitGap / 2 - slitH / 2);
+    ctx.fillRect(slitX - 3, H / 2 - slitGap / 2 + slitH / 2, 7, slitGap - slitH);
+    ctx.fillRect(slitX - 3, H / 2 + slitGap / 2 + slitH / 2, 7, H / 2 - slitGap / 2 - slitH / 2);
+
+    // Animated waves from slits
+    const t = Date.now() / 1000;
+    for (let slit of [-1, 1]) {
+      const sy = H / 2 + slit * slitGap / 2;
+      for (let r2 = 10; r2 < W * 0.25; r2 += 20) {
+        const phase2 = r2 * 0.15 - t * 3;
+        const alpha = Math.max(0, 0.25 - r2 / (W * 0.25) * 0.25) * (0.5 + 0.5 * Math.sin(phase2));
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(${r},${g},${b},${alpha})`;
+        ctx.lineWidth = 1;
+        ctx.arc(slitX, sy, r2, -Math.PI / 2, Math.PI / 2);
+        ctx.stroke();
+      }
+    }
+
+    // Source (left)
+    ctx.fillStyle = '#fff'; ctx.font = 'bold 10px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('→', slitX - 25, H / 2 + 4);
+
+    // Labels
+    ctx.fillStyle = '#8b949e'; ctx.font = '10px sans-serif';
+    ctx.textAlign = 'left'; ctx.fillText(`λ=${lambda}nm  d=${d}  β=λD/d`, 8, H - 8);
+    ctx.textAlign = 'center'; ctx.fillText('Intensity Pattern', patX + patW / 2, 14);
+
+    // Fringe width info
+    const beta = (lambda * 1000) / d;
+    document.getElementById('intInfo').textContent = `Fringe width β ∝ λ/d | λ=${lambda}nm | d=${d} units`;
+  }
+
+  draw();
+  // Animate waves
+  let raf;
+  function animate() { draw(); wrap._animId = raf = requestAnimationFrame(animate); }
+  if (wrap._animId) cancelAnimationFrame(wrap._animId);
+  animate();
+  document.getElementById('intL').oninput = () => {};
+  document.getElementById('intD').oninput = () => {};
+};
+
+// ── Polarisation / Malus's Law ──────────────────────────────
+window.VIS["vPOL"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+
+  function draw() {
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, W, H);
+    const theta = parseInt(document.getElementById('polA').value) * Math.PI / 180;
+    document.getElementById('polLbl').textContent = document.getElementById('polA').value + '°';
+    const I = Math.pow(Math.cos(theta), 2);
+
+    const cx1 = W * 0.18, cx2 = W * 0.5, cx3 = W * 0.82, cy = H * 0.48, R = Math.min(H * 0.28, 55);
+
+    // Unpolarised light (multiple arrows)
+    for (let a = 0; a < Math.PI; a += Math.PI / 6) {
+      ctx.beginPath();
+      ctx.strokeStyle = 'rgba(255,255,200,0.35)'; ctx.lineWidth = 1.5;
+      ctx.moveTo(cx1 + Math.cos(a) * R * 0.7, cy + Math.sin(a) * R * 0.7);
+      ctx.lineTo(cx1 - Math.cos(a) * R * 0.7, cy - Math.sin(a) * R * 0.7);
+      ctx.stroke();
+    }
+    ctx.fillStyle = '#muted'; ctx.font = '10px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillStyle = '#8b949e'; ctx.fillText('Unpolarised', cx1, cy + R + 14);
+
+    // Polariser (fixed vertical)
+    ctx.save(); ctx.translate(cx2, cy);
+    ctx.fillStyle = 'rgba(88,166,255,0.15)'; ctx.strokeStyle = '#58a6ff'; ctx.lineWidth = 2;
+    ctx.fillRect(-8, -R, 16, R * 2); ctx.strokeRect(-8, -R, 16, R * 2);
+    ctx.restore();
+    ctx.fillStyle = '#58a6ff'; ctx.font = '10px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('Polariser', cx2, cy + R + 14);
+
+    // Polarised beam
+    ctx.beginPath(); ctx.strokeStyle = 'rgba(255,255,200,0.5)'; ctx.lineWidth = 2;
+    ctx.moveTo(cx1 + R * 0.8, cy); ctx.lineTo(cx2 - 8, cy); ctx.stroke();
+
+    // Analyser (rotatable)
+    ctx.save(); ctx.translate(cx3, cy); ctx.rotate(theta);
+    ctx.fillStyle = 'rgba(240,136,62,0.15)'; ctx.strokeStyle = '#f0883e'; ctx.lineWidth = 2;
+    ctx.fillRect(-8, -R, 16, R * 2); ctx.strokeRect(-8, -R, 16, R * 2);
+    ctx.restore();
+    ctx.fillStyle = '#f0883e'; ctx.font = '10px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(`Analyser (${document.getElementById('polA').value}°)`, cx3, cy + R + 14);
+
+    // Transmitted beam
+    const alpha = I * 0.85;
+    ctx.beginPath(); ctx.strokeStyle = `rgba(255,255,200,${alpha})`; ctx.lineWidth = 3;
+    ctx.moveTo(cx2 + 8, cy); ctx.lineTo(cx3 - 8, cy); ctx.stroke();
+
+    // Intensity meter
+    const meterW = 60, meterH = 12;
+    const mx = cx3 + 18, my = cy - 6;
+    ctx.fillStyle = '#21262d'; ctx.fillRect(mx, my, meterW, meterH);
+    ctx.fillStyle = `rgba(255,255,200,${I})`; ctx.fillRect(mx, my, meterW * I, meterH);
+    ctx.strokeStyle = '#30363d'; ctx.lineWidth = 1; ctx.strokeRect(mx, my, meterW, meterH);
+
+    // Formula result
+    ctx.fillStyle = '#f0883e'; ctx.font = 'bold 12px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(`I = I₀·cos²(${document.getElementById('polA').value}°) = ${(I * 100).toFixed(1)}%·I₀`, W / 2, H - 10);
+
+    document.getElementById('polInfo').textContent = `θ = ${document.getElementById('polA').value}° | cos²θ = ${I.toFixed(3)} | I = ${(I * 100).toFixed(1)}% of I₀`;
+  }
+  draw();
+  document.getElementById('polA').oninput = draw;
+};
+
+// ── Laser Photon Chain Reaction ─────────────────────────────
+window.VIS["vLASER"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  let t = 0;
+
+  function frame() {
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, W, H);
+    // Cavity walls (mirrors)
+    ctx.fillStyle = '#30363d'; ctx.fillRect(0, H * 0.2, 6, H * 0.6);
+    ctx.fillStyle = '#8b949e'; ctx.fillRect(W - 6, H * 0.2, 6, H * 0.6);
+    ctx.fillStyle = '#58a6ff'; ctx.font = '9px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Full Mirror', 3, H * 0.18); ctx.fillText('Partial Mirror', W - 3, H * 0.18);
+
+    // Excited atoms (circles)
+    const atoms = [];
+    for (let i = 0; i < 8; i++) {
+      for (let j = 0; j < 3; j++) {
+        atoms.push({ x: 50 + i * (W - 100) / 7, y: H * 0.3 + j * H * 0.18 });
+      }
+    }
+    atoms.forEach(a => {
+      ctx.beginPath(); ctx.arc(a.x, a.y, 7, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(188,140,255,0.7)'; ctx.fill();
+    });
+    ctx.fillStyle = '#bc8cff'; ctx.font = '8px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('Excited atoms', W / 2, H * 0.88);
+
+    // Bouncing photons
+    const nPhotons = Math.min(12, Math.floor(t / 30) + 1);
+    for (let i = 0; i < nPhotons; i++) {
+      const off = i * 37;
+      const px = ((t * 4 + off) % (W * 2));
+      const rx = px < W ? px : W * 2 - px;
+      const py = H * 0.3 + (i % 3) * H * 0.18;
+      ctx.beginPath(); ctx.arc(rx, py, 4, 0, Math.PI * 2);
+      ctx.fillStyle = '#f0883e'; ctx.fill();
+      // Trail
+      ctx.beginPath(); ctx.strokeStyle = 'rgba(240,136,62,0.3)'; ctx.lineWidth = 1;
+      const tr = Math.min(20, rx);
+      ctx.moveTo(rx - tr, py); ctx.lineTo(rx, py); ctx.stroke();
+    }
+
+    // Label
+    ctx.fillStyle = '#3fb950'; ctx.font = 'bold 11px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(`Photons: ${nPhotons} (chain reaction!)`, W / 2, H - 10);
+
+    t++;
+    wrap._animId = requestAnimationFrame(frame);
+  }
+  if (wrap._animId) cancelAnimationFrame(wrap._animId);
+  frame();
+};
+
+// ── Electric Field Lines ────────────────────────────────────
+window.VIS["vEFIELD"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+  function draw() {
+    const W = canvas.width, H = canvas.height;
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, W, H);
+    const type = document.getElementById('efType').value;
+    let charges = [];
+    if (type === 'dipole')  charges = [{ x: W*0.38, y: H*0.5, q: 1 }, { x: W*0.62, y: H*0.5, q: -1 }];
+    else if (type === 'plus')   charges = [{ x: W*0.5,  y: H*0.5, q: 1 }];
+    else if (type === 'minus')  charges = [{ x: W*0.5,  y: H*0.5, q: -1 }];
+    else charges = [{ x: W*0.35, y: H*0.5, q: 1 }, { x: W*0.65, y: H*0.5, q: 1 }];
+
+    // Vector field arrows
+    const sp = 30;
+    for (let gx = sp; gx < W; gx += sp) {
+      for (let gy = sp; gy < H; gy += sp) {
+        let ex = 0, ey = 0;
+        for (const c of charges) {
+          const dx = gx - c.x, dy = gy - c.y, r2 = dx*dx + dy*dy;
+          if (r2 < 500) continue;
+          const r3 = Math.pow(r2, 1.5);
+          ex += c.q * dx / r3; ey += c.q * dy / r3;
+        }
+        const mag = Math.sqrt(ex*ex + ey*ey);
+        if (mag < 1e-5) continue;
+        const len = 9, nx = ex/mag, ny = ey/mag;
+        const int = Math.min(1, mag * 15000);
+        arrow(ctx, gx - nx*len/2, gy - ny*len/2, gx + nx*len/2, gy + ny*len/2,
+              `rgba(88,166,255,${0.15 + int*0.8})`, 1);
+      }
+    }
+
+    // Charge circles
+    for (const c of charges) {
+      const gr = ctx.createRadialGradient(c.x, c.y, 2, c.x, c.y, 14);
+      gr.addColorStop(0, c.q > 0 ? '#ff8a8a' : '#8affa0');
+      gr.addColorStop(1, c.q > 0 ? '#f85149' : '#3fb950');
+      ctx.beginPath(); ctx.arc(c.x, c.y, 14, 0, Math.PI*2);
+      ctx.fillStyle = gr; ctx.fill();
+      ctx.fillStyle = '#fff'; ctx.font = 'bold 14px sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText(c.q > 0 ? '+' : '−', c.x, c.y + 5);
+    }
+    ctx.fillStyle = '#8b949e'; ctx.font = '10px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('Electric field lines (E = kQ/r² direction)', W/2, H - 6);
+  }
+  draw();
+  document.getElementById('efType').onchange = draw;
+};
+
+// ── B-H Hysteresis Loop ─────────────────────────────────────
+window.VIS["vBH"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W / 2, cy = H / 2;
+  let t = 0;
+
+  function frame() {
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, W, H);
+    grid(ctx, W, H);
+    axes(ctx, cx, cy, W, H);
+    ctx.fillStyle = '#8b949e'; ctx.font = '10px sans-serif';
+    ctx.textAlign = 'center'; ctx.fillText('H →', W - 20, cy - 6);
+    ctx.fillText('↑ B', cx + 10, 14);
+
+    // Draw hysteresis loop up to current t
+    const pts = [];
+    for (let i = 0; i <= 360; i++) {
+      const angle = (i / 360) * Math.PI * 2;
+      const H2 = Math.cos(angle);
+      const B = Math.sin(angle) + 0.3 * Math.sin(angle * 2);
+      pts.push([cx + H2 * (W * 0.36), cy - B * (H * 0.36)]);
+    }
+    const maxPts = Math.min(pts.length, Math.floor((t / 180) * pts.length));
+    if (maxPts > 1) {
+      ctx.beginPath(); ctx.strokeStyle = '#f0883e'; ctx.lineWidth = 2.5;
+      ctx.moveTo(pts[0][0], pts[0][1]);
+      for (let i = 1; i < maxPts; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+      ctx.stroke();
+    }
+
+    // Labels
+    if (t > 120) {
+      ctx.fillStyle = '#3fb950'; ctx.font = '9px sans-serif';
+      ctx.textAlign = 'left'; ctx.fillText('Retentivity (B_r)', cx + 6, cy - H * 0.22);
+      ctx.fillStyle = '#f85149'; ctx.textAlign = 'center';
+      ctx.fillText('Coercivity (H_c)', cx + W * 0.3, cy + 12);
+    }
+    ctx.fillStyle = '#8b949e'; ctx.font = '10px sans-serif';
+    ctx.textAlign = 'center'; ctx.fillText('B-H Hysteresis Loop (Ferromagnetic material)', W/2, H - 6);
+
+    t = (t + 1) % 200;
+    wrap._animId = requestAnimationFrame(frame);
+  }
+  if (wrap._animId) cancelAnimationFrame(wrap._animId);
+  frame();
+};
+
+// ── Black Body Radiation ─────────────────────────────────────
+window.VIS["vBB"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+  function draw() {
+    const W = canvas.width, H = canvas.height;
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, W, H);
+    grid(ctx, W, H);
+    const T = parseInt(document.getElementById('bbT').value);
+    document.getElementById('bbLbl').textContent = T + 'K';
+
+    const h = 6.626e-34, c = 3e8, k = 1.38e-23;
+    const lMin = 100e-9, lMax = 2500e-9;
+    const ml = 30, mr = 20, mt = 20, mb = 30;
+    const pw = W - ml - mr, ph = H - mt - mb;
+
+    // Axes
+    ctx.strokeStyle = '#2a3040'; ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(ml, mt); ctx.lineTo(ml, mt + ph);
+    ctx.lineTo(ml + pw, mt + ph); ctx.stroke();
+    ctx.fillStyle = '#8b949e'; ctx.font = '10px sans-serif';
+    ctx.textAlign = 'center'; ctx.fillText('Wavelength (nm) →', ml + pw/2, H - 4);
+
+    const temps = [T * 0.5, T * 0.75, T];
+    const colors = ['rgba(248,81,73,0.5)', 'rgba(240,136,62,0.7)', '#f0883e'];
+    let maxB = 0;
+    for (const Tt of temps) {
+      for (let i = 0; i <= 200; i++) {
+        const λ = lMin + (i / 200) * (lMax - lMin);
+        const B = (2 * h * c * c) / (Math.pow(λ, 5) * (Math.exp((h * c) / (λ * k * Tt)) - 1));
+        if (B > maxB) maxB = B;
+      }
+    }
+
+    temps.forEach((Tt, ti) => {
+      ctx.beginPath(); ctx.strokeStyle = colors[ti]; ctx.lineWidth = 2;
+      for (let i = 0; i <= 200; i++) {
+        const λ = lMin + (i / 200) * (lMax - lMin);
+        const B = (2 * h * c * c) / (Math.pow(λ, 5) * (Math.exp((h * c) / (λ * k * Tt)) - 1));
+        const px = ml + (i / 200) * pw;
+        const py = mt + ph - (B / maxB) * ph * 0.92;
+        i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+      }
+      ctx.stroke();
+      ctx.fillStyle = colors[ti]; ctx.font = '9px sans-serif'; ctx.textAlign = 'left';
+      ctx.fillText(`T=${Math.round(Tt)}K`, ml + pw * 0.7, mt + (ti + 1) * 14);
+    });
+
+    // Wien peak marker
+    const lPeak = (2.898e-3 / T) * 1e9;
+    const peakPx = ml + ((lPeak * 1e-9 - lMin) / (lMax - lMin)) * pw;
+    if (peakPx > ml && peakPx < ml + pw) {
+      ctx.setLineDash([3, 3]); ctx.strokeStyle = 'rgba(255,255,100,0.5)'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(peakPx, mt); ctx.lineTo(peakPx, mt + ph); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = 'rgba(255,255,100,0.8)'; ctx.font = '9px sans-serif';
+      ctx.textAlign = 'center'; ctx.fillText(`λ_max=${lPeak.toFixed(0)}nm`, peakPx, mt + 12);
+    }
+  }
+  draw();
+  document.getElementById('bbT').oninput = draw;
+};
+
+// ── Particle in a Box ───────────────────────────────────────
+window.VIS["vPIB"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  let t = 0;
+
+  function frame() {
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, W, H);
+    grid(ctx, W, H);
+    const n = parseInt(document.getElementById('pibN').value);
+    const show = document.getElementById('pibShow').value;
+    document.getElementById('pibNlbl').textContent = n;
+
+    const L = W * 0.7, x0 = (W - L) / 2, cy = H * 0.5;
+
+    // Box walls
+    ctx.fillStyle = '#30363d';
+    ctx.fillRect(x0 - 10, H * 0.1, 10, H * 0.8);
+    ctx.fillRect(x0 + L, H * 0.1, 10, H * 0.8);
+
+    // Energy level lines (left side)
+    for (let ni = 1; ni <= Math.min(n + 1, 6); ni++) {
+      const ey = cy + 40 - ni * ni * 8;
+      if (ey > H * 0.1 && ey < H * 0.9) {
+        ctx.strokeStyle = ni === n ? '#bc8cff' : 'rgba(188,140,255,0.2)';
+        ctx.lineWidth = ni === n ? 2 : 1;
+        ctx.setLineDash([3, 3]);
+        ctx.beginPath(); ctx.moveTo(10, ey); ctx.lineTo(x0 - 10, ey); ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = ni === n ? '#bc8cff' : 'rgba(188,140,255,0.3)';
+        ctx.font = '8px sans-serif'; ctx.textAlign = 'right';
+        ctx.fillText(`n=${ni}`, 38, ey + 3);
+      }
+    }
+
+    const amp = H * 0.33;
+    const timePhase = Math.cos(t * 0.03); // slow oscillation
+
+    // Draw wavefunction and/or probability
+    if (show === 'psi' || show === 'both') {
+      ctx.beginPath(); ctx.strokeStyle = '#bc8cff'; ctx.lineWidth = 2.5;
+      for (let px = 0; px <= L; px++) {
+        const x = px / L;
+        const psi = Math.sqrt(2) * Math.sin(n * Math.PI * x) * timePhase;
+        const y = cy - psi * amp * 0.85;
+        px === 0 ? ctx.moveTo(x0 + px, y) : ctx.lineTo(x0 + px, y);
+      }
+      ctx.stroke();
+    }
+
+    if (show === 'prob' || show === 'both') {
+      ctx.beginPath(); ctx.fillStyle = 'rgba(63,185,80,0.25)';
+      ctx.moveTo(x0, H * 0.9);
+      for (let px = 0; px <= L; px++) {
+        const x = px / L;
+        const prob = 2 * Math.pow(Math.sin(n * Math.PI * x), 2);
+        const y = H * 0.9 - prob * amp * 0.65;
+        px === 0 ? ctx.lineTo(x0 + px, y) : ctx.lineTo(x0 + px, y);
+      }
+      ctx.lineTo(x0 + L, H * 0.9); ctx.closePath(); ctx.fill();
+
+      ctx.beginPath(); ctx.strokeStyle = '#3fb950'; ctx.lineWidth = 2;
+      for (let px = 0; px <= L; px++) {
+        const x = px / L;
+        const prob = 2 * Math.pow(Math.sin(n * Math.PI * x), 2);
+        const y = H * 0.9 - prob * amp * 0.65;
+        px === 0 ? ctx.moveTo(x0 + px, y) : ctx.lineTo(x0 + px, y);
+      }
+      ctx.stroke();
+    }
+
+    // Legend
+    if (show === 'both') {
+      ctx.fillStyle = '#bc8cff'; ctx.fillRect(x0 + L + 14, H * 0.35, 10, 2);
+      ctx.fillStyle = '#bc8cff'; ctx.font = '9px sans-serif'; ctx.textAlign = 'left'; ctx.fillText('Ψ', x0 + L + 28, H * 0.38);
+      ctx.fillStyle = '#3fb950'; ctx.fillRect(x0 + L + 14, H * 0.45, 10, 2);
+      ctx.fillStyle = '#3fb950'; ctx.fillText('|Ψ|²', x0 + L + 28, H * 0.48);
+    }
+
+    ctx.fillStyle = '#bc8cff'; ctx.font = 'bold 12px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(`n = ${n}  |  E = ${n*n}·E₁`, W / 2, H * 0.08);
+
+    document.getElementById('pibInfo').textContent =
+      `n=${n} | Nodes inside box = n−1 = ${n-1} | Energy = ${n*n}×E₁`;
+
+    t++;
+    wrap._animId = requestAnimationFrame(frame);
+  }
+  if (wrap._animId) cancelAnimationFrame(wrap._animId);
+  frame();
+
+  document.getElementById('pibN').oninput = () => {
+    document.getElementById('pibNlbl').textContent = document.getElementById('pibN').value;
+  };
+};
+
+// ── Hydrogen Atom Bohr Model ────────────────────────────────
+window.VIS["vHYDRO"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W * 0.38, cy = H / 2;
+  let t = 0;
+
+  function frame() {
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, W, H);
+    const n = parseInt(document.getElementById('hydroN').value);
+    document.getElementById('hydroNlbl').textContent = n;
+
+    // Draw orbits
+    for (let ni = 1; ni <= 5; ni++) {
+      const r = ni * Math.min(cx * 0.18, H * 0.085) * 1.1;
+      ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.strokeStyle = ni === n ? 'rgba(88,166,255,0.7)' : 'rgba(255,255,255,0.08)';
+      ctx.lineWidth = ni === n ? 2 : 1;
+      ctx.setLineDash([4, 4]); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = ni === n ? '#58a6ff' : 'rgba(139,148,158,0.4)';
+      ctx.font = '8px sans-serif'; ctx.textAlign = 'left';
+      ctx.fillText(`n=${ni}`, cx + r + 2, cy - 3);
+    }
+
+    // Nucleus
+    const gnuc = ctx.createRadialGradient(cx, cy, 1, cx, cy, 10);
+    gnuc.addColorStop(0, '#ff8080'); gnuc.addColorStop(1, '#c0392b');
+    ctx.beginPath(); ctx.arc(cx, cy, 10, 0, Math.PI * 2);
+    ctx.fillStyle = gnuc; ctx.fill();
+    ctx.fillStyle = '#fff'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('p⁺', cx, cy + 3);
+
+    // Electron
+    const r = n * Math.min(cx * 0.18, H * 0.085) * 1.1;
+    const speed = 0.04 / (n * n * 0.3 + 0.1);
+    const ex = cx + r * Math.cos(t * speed);
+    const ey = cy + r * Math.sin(t * speed);
+    const gel = ctx.createRadialGradient(ex, ey, 1, ex, ey, 7);
+    gel.addColorStop(0, '#a0e8ff'); gel.addColorStop(1, '#3fb950');
+    ctx.beginPath(); ctx.arc(ex, ey, 7, 0, Math.PI * 2);
+    ctx.fillStyle = gel; ctx.fill();
+    ctx.fillStyle = '#fff'; ctx.font = 'bold 7px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('e⁻', ex, ey + 2);
+
+    // Energy level diagram (right side)
+    const ex0 = W * 0.62, ew = W * 0.34;
+    ctx.fillStyle = '#8b949e'; ctx.font = '9px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('Energy Levels', ex0 + ew/2, H * 0.08);
+    for (let ni = 1; ni <= 5; ni++) {
+      const E = -13.6 / (ni * ni);
+      const py = H * 0.15 + (1 - (ni / 5)) * H * 0.7;
+      ctx.strokeStyle = ni === n ? '#58a6ff' : '#2a3040';
+      ctx.lineWidth = ni === n ? 2 : 1;
+      ctx.beginPath(); ctx.moveTo(ex0, py); ctx.lineTo(ex0 + ew, py); ctx.stroke();
+      ctx.fillStyle = ni === n ? '#58a6ff' : '#8b949e';
+      ctx.font = `${ni === n ? 'bold ' : ''}9px sans-serif`;
+      ctx.textAlign = 'left'; ctx.fillText(`n=${ni}: ${E.toFixed(2)}eV`, ex0 + ew + 2, py + 3);
+    }
+
+    const E_n = -13.6 / (n * n);
+    ctx.fillStyle = '#58a6ff'; ctx.font = 'bold 11px sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText(`E${n} = ${E_n.toFixed(2)} eV`, 10, 18);
+    ctx.fillStyle = '#8b949e'; ctx.font = '10px sans-serif';
+    ctx.fillText(`r${n} = ${(n * n * 0.529).toFixed(2)} Å`, 10, 33);
+
+    document.getElementById('hydroInfo').textContent =
+      `n=${n} | E = ${E_n.toFixed(2)} eV | r = ${(n*n*0.529).toFixed(2)} Å`;
+
+    t++;
+    wrap._animId = requestAnimationFrame(frame);
+  }
+  if (wrap._animId) cancelAnimationFrame(wrap._animId);
+  frame();
+  document.getElementById('hydroN').oninput = () => {
+    document.getElementById('hydroNlbl').textContent = document.getElementById('hydroN').value;
+  };
+};
+
+// ── Maxwell-Boltzmann Distribution ─────────────────────────
+window.VIS["vMB"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+  function draw() {
+    const W = canvas.width, H = canvas.height;
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, W, H);
+    grid(ctx, W, H);
+    const T = parseInt(document.getElementById('mbT').value);
+    document.getElementById('mbLbl').textContent = T + 'K';
+    const m = 4.65e-26; // N₂
+    const k = 1.38e-23;
+    const ml = 35, mr = 10, mt = 25, mb = 28;
+    const pw = W - ml - mr, ph = H - mt - mb;
+
+    // Axes
+    ctx.strokeStyle = '#2a3040'; ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(ml, mt); ctx.lineTo(ml, mt + ph);
+    ctx.lineTo(ml + pw, mt + ph); ctx.stroke();
+    ctx.fillStyle = '#8b949e'; ctx.font = '10px sans-serif';
+    ctx.textAlign = 'center'; ctx.fillText('Speed v (m/s) →', ml + pw/2, H - 4);
+    ctx.save(); ctx.translate(12, mt + ph/2); ctx.rotate(-Math.PI/2);
+    ctx.fillText('f(v)', 0, 0); ctx.restore();
+
+    const vMax = 3000;
+    function fv(v) {
+      return 4 * Math.PI * Math.pow(m / (2 * Math.PI * k * T), 1.5) * v * v * Math.exp(-m * v * v / (2 * k * T));
+    }
+    let maxF = 0;
+    for (let v = 0; v < vMax; v += 10) maxF = Math.max(maxF, fv(v));
+
+    // Draw curve (filled)
+    ctx.beginPath();
+    ctx.moveTo(ml, mt + ph);
+    for (let px = 0; px < pw; px++) {
+      const v = (px / pw) * vMax;
+      const y = mt + ph - (fv(v) / maxF) * ph * 0.92;
+      ctx.lineTo(ml + px, y);
+    }
+    ctx.lineTo(ml + pw, mt + ph); ctx.closePath();
+    ctx.fillStyle = 'rgba(63,185,80,0.12)'; ctx.fill();
+    ctx.beginPath();
+    for (let px = 0; px < pw; px++) {
+      const v = (px / pw) * vMax;
+      const y = mt + ph - (fv(v) / maxF) * ph * 0.92;
+      px === 0 ? ctx.moveTo(ml + px, y) : ctx.lineTo(ml + px, y);
+    }
+    ctx.strokeStyle = '#3fb950'; ctx.lineWidth = 2.5; ctx.stroke();
+
+    // Speed markers
+    const vmp = Math.sqrt(2 * k * T / m);
+    const vavg = Math.sqrt(8 * k * T / (Math.PI * m));
+    const vrms = Math.sqrt(3 * k * T / m);
+    const speeds = [[vmp, '#f0883e', 'v_mp'], [vavg, '#58a6ff', 'v_avg'], [vrms, '#bc8cff', 'v_rms']];
+    speeds.forEach(([v, col, nm]) => {
+      if (v > vMax) return;
+      const px = ml + (v / vMax) * pw;
+      ctx.setLineDash([4, 3]); ctx.strokeStyle = col; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(px, mt); ctx.lineTo(px, mt + ph); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = col; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText(nm, px, mt + 10);
+      ctx.font = '8px sans-serif';
+      ctx.fillText(`${Math.round(v)}`, px, mt + ph + 16);
+    });
+
+    document.getElementById('mbInfo').textContent =
+      `T=${T}K | v_mp=${Math.round(vmp)} | v_avg=${Math.round(vavg)} | v_rms=${Math.round(vrms)} m/s`;
+  }
+  draw();
+  document.getElementById('mbT').oninput = draw;
+};
+
+// ── Fermi-Dirac / BE / MB All 3 ────────────────────────────
+window.VIS["vFD"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+  function draw() {
+    const W = canvas.width, H = canvas.height;
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, W, H);
+    grid(ctx, W, H);
+    const T = parseInt(document.getElementById('fdT').value);
+    document.getElementById('fdLbl').textContent = T + 'K';
+    const k = 1.38e-23, mu = 1.5 * k * 5000;
+    const Emax = 5 * k * 5000;
+    const ml = 35, mr = 10, mt = 25, mb = 28;
+    const pw = W - ml - mr, ph = H - mt - mb;
+
+    ctx.strokeStyle = '#2a3040'; ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(ml, mt); ctx.lineTo(ml, mt + ph);
+    ctx.lineTo(ml + pw, mt + ph); ctx.stroke();
+    ctx.fillStyle = '#8b949e'; ctx.font = '10px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('Energy E →', ml + pw/2, H - 4);
+    ctx.fillText('Occupation probability f(E)', ml + pw/2, mt - 8);
+
+    // FD
+    ctx.beginPath(); ctx.strokeStyle = '#58a6ff'; ctx.lineWidth = 2;
+    for (let px = 0; px < pw; px++) {
+      const E = (px / pw) * Emax;
+      let f = 1 / (Math.exp((E - mu) / (k * T)) + 1);
+      if (!isFinite(f)) f = E < mu ? 1 : 0;
+      const y = mt + ph - f * ph * 0.9;
+      px === 0 ? ctx.moveTo(ml+px, y) : ctx.lineTo(ml+px, y);
+    }
+    ctx.stroke();
+
+    // BE
+    ctx.beginPath(); ctx.strokeStyle = '#f0883e'; ctx.lineWidth = 2;
+    for (let px = 0; px < pw; px++) {
+      const E = (px / pw) * Emax;
+      if (E <= mu * 1.05) { ctx.beginPath(); continue; }
+      let f = 1 / (Math.exp((E - mu) / (k * T)) - 1);
+      if (!isFinite(f) || f < 0 || f > 5) continue;
+      const y = mt + ph - Math.min(f, 1) * ph * 0.9;
+      px === 0 ? ctx.moveTo(ml+px, y) : ctx.lineTo(ml+px, y);
+    }
+    ctx.stroke();
+
+    // MB
+    ctx.beginPath(); ctx.strokeStyle = '#3fb950'; ctx.lineWidth = 2;
+    for (let px = 0; px < pw; px++) {
+      const E = (px / pw) * Emax;
+      const f = Math.exp(-E / (k * T));
+      const y = mt + ph - f * ph * 0.9;
+      px === 0 ? ctx.moveTo(ml+px, y) : ctx.lineTo(ml+px, y);
+    }
+    ctx.stroke();
+
+    // Legend
+    [['FD (Electrons/Fermions)', '#58a6ff'], ['BE (Photons/Bosons)', '#f0883e'], ['MB (Classical)', '#3fb950']].forEach(([txt, col], i) => {
+      ctx.fillStyle = col; ctx.fillRect(ml + 5, mt + 5 + i * 16, 14, 3);
+      ctx.fillStyle = col; ctx.font = '9px sans-serif'; ctx.textAlign = 'left';
+      ctx.fillText(txt, ml + 24, mt + 12 + i * 16);
+    });
+  }
+  draw();
+  document.getElementById('fdT').oninput = draw;
+};
+
+// ═══════════════════════════════════════════
+//  QUIZZES
+// ═══════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  runQuiz('qSHM', [
+    { q: 'Restoring force in SHM is proportional to:', opts: ['Velocity', 'Displacement', 'Acceleration', 'Mass'], a: 1, exp: 'F = −kx, force ∝ displacement (opposite direction)' },
+    { q: 'Time period of spring-mass SHM: T = ?', opts: ['2π√(m/k)', '2π√(k/m)', 'π√(m/k)', '√(m/k)'], a: 0, exp: 'T = 2π/ω = 2π√(m/k)' },
+    { q: 'Total energy in SHM depends on:', opts: ['x', 'v', 'A (amplitude)', 'T (period)'], a: 2, exp: 'E = ½kA² — total energy = constant, depends only on amplitude' },
+  ]);
+  runQuiz('qOPT', [
+    { q: "Young's fringe width β = ?", opts: ['λd/D', 'λD/d', 'dD/λ', 'λD²/d'], a: 1, exp: 'β = λD/d (D=screen dist, d=slit sep, λ=wavelength)' },
+    { q: 'Malus\'s Law: I = ?', opts: ['I₀cosθ', 'I₀cos²θ', 'I₀/cosθ', 'I₀sinθ'], a: 1, exp: 'I = I₀cos²θ — intensity through analyser at angle θ' },
+    { q: 'For constructive interference, path diff = ?', opts: ['nλ', '(2n−1)λ/2', 'λ/n', 'nλ²'], a: 0, exp: 'Path difference = nλ for bright fringes (n = 0,1,2,…)' },
+  ]);
+  runQuiz('qQM', [
+    { q: 'Energy in particle-in-box: Eₙ ∝ ?', opts: ['n', 'n²', '1/n', 'n³'], a: 1, exp: 'Eₙ = n²π²ℏ²/(2mL²) — quadratic in n' },
+    { q: '|Ψ(x)|² represents:', opts: ['Energy', 'Momentum', 'Probability density', 'Speed'], a: 2, exp: '|Ψ|² = probability of finding particle at position x' },
+    { q: 'Ground state energy (n=1) vs n=3: E₃ = ?', opts: ['E₁', '3E₁', '9E₁', '6E₁'], a: 2, exp: 'E₃ = 3²E₁ = 9E₁' },
+  ]);
+});
+</script>
+</body>
+</html>

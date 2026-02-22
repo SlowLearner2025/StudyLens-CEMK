@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basic Electrical | MAKAUT CSE Visual Hub</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">← <span>Basic Electrical</span></a>
+  <button class="theme-btn" id="themeBtn">☀️</button>
+</header>
+
+<div class="topic-nav">
+  <a href="#dc" class="tpill">🔋 DC Circuits</a>
+  <a href="#ac" class="tpill">〜 AC Circuits</a>
+  <a href="#transformer" class="tpill">🔄 Transformer</a>
+  <a href="#machines" class="tpill">⚙️ Machines</a>
+  <a href="#converters" class="tpill">🔁 Converters</a>
+</div>
+
+<div class="container">
+
+<!-- ============================================================
+     DC CIRCUITS
+     ============================================================ -->
+<div class="section" id="dc">
+  <div class="sec-title">🔋 DC Circuits <span class="tag tag-exam">Exam Hot</span></div>
+
+  <!-- KIRCHHOFF'S LAWS -->
+  <div class="collap" id="kirchhoff">
+    <div class="collap-hd">
+      Kirchhoff's Laws (KVL & KCL)
+      <span class="collap-arrow">▼</span>
+    </div>
+    <div class="collap-bd">
+      <div class="flex gap-8 flex-wrap mb-12">
+        <span class="tag tag-exam">⭐ Very Important</span>
+        <span class="tag tag-vis">🎬 Has Animation</span>
+      </div>
+      <p class="sm muted" style="margin-bottom:10px">
+        KCL (Current Law): Sum of currents entering a node = sum leaving. KVL (Voltage Law): Sum of voltages around any closed loop = 0. These are the basis for all circuit analysis.
+      </p>
+
+      <button class="btn btn-purple btn-sm" data-eli5="eli5-kvl">🧠 Explain Like I'm Weak</button>
+      <div class="eli5" id="eli5-kvl">
+        <div class="eli5-head">🧠 Super Simple Explanation</div>
+        <p>KCL = Water law 💧 — whatever water flows INTO a junction, the same must flow OUT (no water disappears). KVL = Hill law ⛰️ — if you walk around a circuit loop and come back to start, the total uphill = total downhill (voltages cancel out).</p>
+      </div>
+
+      <div class="formula">
+        KCL: ΣI_in = ΣI_out  (at any node)<br>
+        KVL: ΣV = 0  (around any closed loop)<br>
+        Ohm's Law: V = IR<br>
+        Series: R_total = R₁ + R₂ + R₃<br>
+        Parallel: 1/R_total = 1/R₁ + 1/R₂ + 1/R₃<br>
+        Voltage divider: V₁ = V · R₁/(R₁+R₂)<br>
+        Current divider: I₁ = I · R₂/(R₁+R₂)
+      </div>
+
+      <button class="btn btn-primary btn-sm" data-vis="vis-kirchhoff">🎬 Visualize KVL Circuit</button>
+      <div class="vis-wrap open" id="vis-kirchhoff">
+        <canvas id="canvas-kirchhoff" width="500" height="240"></canvas>
+        <div class="vis-ctrl">
+          <label>Source V (V)</label>
+          <input type="range" id="kvl-v" min="1" max="20" value="10">
+          <span id="kvl-v-label" style="font-weight:700;color:var(--orange)">10V</span>
+          <label>R₁ (Ω)</label>
+          <input type="range" id="kvl-r1" min="1" max="20" value="5">
+          <label>R₂ (Ω)</label>
+          <input type="range" id="kvl-r2" min="1" max="20" value="5">
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div id="quiz-dc"></div>
+    </div>
+  </div>
+
+  <!-- RC/RL Circuits -->
+  <div class="collap">
+    <div class="collap-hd">RC & RL Circuit Transient Response <span class="collap-arrow">▼</span></div>
+    <div class="collap-bd">
+      <div class="flex gap-8 flex-wrap mb-12">
+        <span class="tag tag-exam">⭐ Important</span>
+        <span class="tag tag-vis">🎬 Has Animation</span>
+      </div>
+      <p class="sm muted" style="margin-bottom:10px">
+        When a capacitor/inductor is connected to DC, it doesn't charge/discharge instantly — it follows an exponential curve. The time constant τ determines how fast.
+      </p>
+
+      <button class="btn btn-purple btn-sm" data-eli5="eli5-rc">🧠 Explain Like I'm Weak</button>
+      <div class="eli5" id="eli5-rc">
+        <div class="eli5-head">🧠 Super Simple Explanation</div>
+        <p>Charging a capacitor is like filling a bucket 🪣 with a narrow pipe (R). At first, water flows fast. As bucket fills up, flow slows. At 63% full → that's 1 time constant (τ = RC). Fully "charged" ≈ 5τ.</p>
+      </div>
+
+      <div class="formula">
+        RC charging: V(t) = V₀(1 − e^(−t/τ))  [τ = RC]<br>
+        RC discharging: V(t) = V₀·e^(−t/τ)<br>
+        RL: I(t) = (V/R)(1 − e^(−t/τ))  [τ = L/R]<br>
+        At t=τ: V reaches 63.2% of final value<br>
+        At t=5τ: fully charged/discharged (99%)
+      </div>
+
+      <button class="btn btn-primary btn-sm" data-vis="vis-rc">🎬 Visualize RC Response</button>
+      <div class="vis-wrap open" id="vis-rc">
+        <canvas id="canvas-rc" width="500" height="200"></canvas>
+        <div class="vis-ctrl">
+          <label>Mode</label>
+          <select id="rc-mode" style="background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:4px 8px;font-size:.8rem;">
+            <option value="charge">Charging</option>
+            <option value="discharge">Discharging</option>
+          </select>
+          <label>τ (ms)</label>
+          <input type="range" id="rc-tau" min="1" max="20" value="5">
+          <span id="rc-tau-label" style="font-weight:700;color:var(--blue)">5ms</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     AC CIRCUITS
+     ============================================================ -->
+<div class="section" id="ac">
+  <div class="sec-title">〜 AC Circuits <span class="tag tag-exam">Exam Hot</span></div>
+
+  <div class="collap">
+    <div class="collap-hd">AC Sine Waves & Phasor Diagrams <span class="collap-arrow">▼</span></div>
+    <div class="collap-bd">
+      <div class="flex gap-8 flex-wrap mb-12">
+        <span class="tag tag-exam">⭐ Very Important</span>
+        <span class="tag tag-vis">🎬 Has Animation</span>
+      </div>
+      <p class="sm muted" style="margin-bottom:10px">
+        AC voltage/current varies as a sine wave. A phasor is a rotating vector that represents a sinusoidal quantity. Phase difference between V and I determines if circuit is resistive, inductive, or capacitive.
+      </p>
+
+      <button class="btn btn-purple btn-sm" data-eli5="eli5-ac">🧠 Explain Like I'm Weak</button>
+      <div class="eli5" id="eli5-ac">
+        <div class="eli5-head">🧠 Super Simple Explanation</div>
+        <p>AC is like a fan spinning back and forth. Phasor = clock hand spinning at the same frequency as AC. The "shadow" of the spinning phasor on a line traces out the sine wave! If V and I have the same phase, the load is purely resistive. If I lags V → inductive (L). If I leads V → capacitive (C).</p>
+      </div>
+
+      <div class="formula orange">
+        v(t) = V_m sin(ωt)  [ω = 2πf]<br>
+        V_rms = V_m/√2<br>
+        Impedance: Z = R + j(X_L − X_C)<br>
+        X_L = ωL  (inductive reactance)<br>
+        X_C = 1/ωC  (capacitive reactance)<br>
+        |Z| = √(R² + X²)<br>
+        Phase angle: φ = arctan(X/R)<br>
+        Power factor: cosφ = R/|Z|<br>
+        Active power: P = V_rms·I_rms·cosφ
+      </div>
+
+      <button class="btn btn-primary btn-sm" data-vis="vis-ac">🎬 Visualize AC & Phasor</button>
+      <div class="vis-wrap open" id="vis-ac">
+        <canvas id="canvas-ac" width="500" height="250"></canvas>
+        <div class="vis-ctrl">
+          <label>Circuit type</label>
+          <select id="ac-type" style="background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:4px 8px;font-size:.8rem;">
+            <option value="R">Purely Resistive (R)</option>
+            <option value="RL">RL Circuit (I lags)</option>
+            <option value="RC">RC Circuit (I leads)</option>
+            <option value="RLC">RLC Circuit</option>
+          </select>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div id="quiz-ac"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     TRANSFORMER
+     ============================================================ -->
+<div class="section" id="transformer">
+  <div class="sec-title">🔄 Transformers <span class="tag tag-exam">Exam Hot</span></div>
+
+  <div class="collap">
+    <div class="collap-hd">Transformer Working & Turns Ratio <span class="collap-arrow">▼</span></div>
+    <div class="collap-bd">
+      <div class="flex gap-8 flex-wrap mb-12">
+        <span class="tag tag-exam">⭐ Very Important</span>
+        <span class="tag tag-vis">🎬 Has Animation</span>
+      </div>
+      <p class="sm muted" style="margin-bottom:10px">
+        A transformer transfers electrical energy between two circuits via mutual inductance. An alternating current in the primary coil creates a changing magnetic flux through the core, inducing EMF in the secondary.
+      </p>
+
+      <button class="btn btn-purple btn-sm" data-eli5="eli5-transformer">🧠 Explain Like I'm Weak</button>
+      <div class="eli5" id="eli5-transformer">
+        <div class="eli5-head">🧠 Super Simple Explanation</div>
+        <p>Primary coil = sends magnetic energy through iron core. Secondary coil = receives it. More turns = more voltage. Like a gear system 🦷 — big gear (N₁) drives small gear (N₂). If N₂ < N₁, it's a step-down transformer (reduces voltage, household use).</p>
+      </div>
+
+      <div class="formula purple">
+        Turns ratio: N₁/N₂ = V₁/V₂ = I₂/I₁<br>
+        For ideal transformer: V₁I₁ = V₂I₂<br>
+        Transformation ratio: a = N₁/N₂<br>
+        Step-up: N₂ > N₁ → V₂ > V₁<br>
+        Step-down: N₂ < N₁ → V₂ < V₁<br>
+        Efficiency: η = P_out/P_in × 100%<br>
+        Induced EMF: E = 4.44 f N Φ_m
+      </div>
+
+      <button class="btn btn-primary btn-sm" data-vis="vis-transformer">🎬 Visualize Transformer</button>
+      <div class="vis-wrap open" id="vis-transformer">
+        <canvas id="canvas-transformer" width="500" height="230"></canvas>
+        <div class="vis-ctrl">
+          <label>N₁ (primary turns)</label>
+          <input type="range" id="trans-n1" min="1" max="10" value="4">
+          <span id="trans-n1-label" style="font-weight:700;color:var(--blue)">4</span>
+          <label>N₂ (secondary turns)</label>
+          <input type="range" id="trans-n2" min="1" max="10" value="8">
+          <span id="trans-n2-label" style="font-weight:700;color:var(--orange)">8</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     ELECTRICAL MACHINES
+     ============================================================ -->
+<div class="section" id="machines">
+  <div class="sec-title">⚙️ Electrical Machines</div>
+
+  <div class="collap">
+    <div class="collap-hd">DC Machines — Motors & Generators <span class="collap-arrow">▼</span></div>
+    <div class="collap-bd">
+      <p class="sm muted" style="margin-bottom:10px">
+        DC generator converts mechanical energy to electrical energy (Faraday's law). DC motor converts electrical to mechanical (Lorentz force). Same machine, different operation!
+      </p>
+
+      <button class="btn btn-purple btn-sm" data-eli5="eli5-dcmachine">🧠 Explain Like I'm Weak</button>
+      <div class="eli5" id="eli5-dcmachine">
+        <div class="eli5-head">🧠 Super Simple Explanation</div>
+        <p>Motor: Put electricity in, coil spins (think electric car). Generator: Spin the coil mechanically, electricity comes out (think bicycle dynamo). They're the SAME machine working in reverse!</p>
+      </div>
+
+      <div class="formula">
+        Back EMF: E = V − I_a·R_a<br>
+        Torque: T = K·Φ·I_a<br>
+        Generator: E = V + I_a·R_a<br>
+        Efficiency: η = P_out/(P_out + losses)<br>
+        Speed: N ∝ (V − I_a·R_a)/Φ<br>
+        Power: P = T·ω = EI_a
+      </div>
+
+      <button class="btn btn-primary btn-sm" data-vis="vis-dcmotor">🎬 Visualize Rotating Machine</button>
+      <div class="vis-wrap open" id="vis-dcmotor">
+        <canvas id="canvas-dcmotor" width="500" height="220"></canvas>
+        <div class="vis-ctrl">
+          <label>Speed</label>
+          <input type="range" id="motor-speed" min="1" max="10" value="5">
+          <label>Type</label>
+          <select id="motor-type" style="background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:4px 8px;font-size:.8rem;">
+            <option value="motor">Motor (Elec → Mech)</option>
+            <option value="gen">Generator (Mech → Elec)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="collap">
+    <div class="collap-hd">3-Phase Induction Motor & Rotating Magnetic Field <span class="collap-arrow">▼</span></div>
+    <div class="collap-bd">
+      <div class="flex gap-8 flex-wrap mb-12">
+        <span class="tag tag-exam">⭐ Important</span>
+        <span class="tag tag-vis">🎬 Has Animation</span>
+      </div>
+      <p class="sm muted" style="margin-bottom:10px">
+        Three-phase AC currents in stator windings (120° apart) create a rotating magnetic field. This rotating field induces current in the rotor, creating torque — the motor spins.
+      </p>
+
+      <div class="formula green">
+        Synchronous speed: Ns = 120f/P  (rpm)<br>
+        Slip: s = (Ns − N)/Ns<br>
+        Rotor speed: N = Ns(1 − s)<br>
+        Torque ∝ s·V²/(R₂ + (sX₂)²)<br>
+        At starting: s = 1<br>
+        At no load: s ≈ 0
+      </div>
+
+      <button class="btn btn-primary btn-sm" data-vis="vis-rmf">🎬 Visualize Rotating Magnetic Field</button>
+      <div class="vis-wrap open" id="vis-rmf">
+        <canvas id="canvas-rmf" width="500" height="250"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     POWER CONVERTERS
+     ============================================================ -->
+<div class="section" id="converters">
+  <div class="sec-title">🔁 Power Converters & Installations</div>
+
+  <div class="collap">
+    <div class="collap-hd">Rectifiers — AC to DC Conversion <span class="collap-arrow">▼</span></div>
+    <div class="collap-bd">
+      <p class="sm muted" style="margin-bottom:10px">
+        Rectifiers convert AC to DC using diodes. Half-wave uses 1 diode; full-wave bridge uses 4 diodes and gives smoother output.
+      </p>
+
+      <button class="btn btn-purple btn-sm" data-eli5="eli5-rectifier">🧠 Explain Like I'm Weak</button>
+      <div class="eli5" id="eli5-rectifier">
+        <div class="eli5-head">🧠 Super Simple Explanation</div>
+        <p>A diode is a one-way valve for electricity. AC swings positive AND negative. Half-wave rectifier: blocks negative half, only positive passes. Full-wave: flips the negative half so BOTH become positive — smoother DC! Add a capacitor → even smoother!</p>
+      </div>
+
+      <div class="formula">
+        Half-wave: V_dc = V_m/π = 0.318·V_m<br>
+        Full-wave: V_dc = 2V_m/π = 0.636·V_m<br>
+        Ripple factor: γ = V_rms(ripple)/V_dc<br>
+        Full-wave γ = 0.483<br>
+        PIV (full-wave bridge) = V_m<br>
+        Efficiency: η = 40.6% (HW), 81.2% (FW)
+      </div>
+
+      <button class="btn btn-primary btn-sm" data-vis="vis-rectifier">🎬 Visualize Rectifier Output</button>
+      <div class="vis-wrap open" id="vis-rectifier">
+        <canvas id="canvas-rectifier" width="500" height="200"></canvas>
+        <div class="vis-ctrl">
+          <label>Type</label>
+          <select id="rect-type" style="background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:4px 8px;font-size:.8rem;">
+            <option value="hw">Half-Wave</option>
+            <option value="fw">Full-Wave</option>
+            <option value="fwc">Full-Wave + Capacitor Filter</option>
+          </select>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div id="quiz-elec"></div>
+    </div>
+  </div>
+
+  <div class="collap">
+    <div class="collap-hd">Electrical Installations & Safety <span class="collap-arrow">▼</span></div>
+    <div class="collap-bd">
+      <div class="formula orange">
+        Indian grid: 230V, 50Hz (single phase)<br>
+        3-phase: 415V line-to-line<br>
+        V_L = √3 × V_ph<br>
+        I_L = I_ph  (star connection)<br>
+        I_L = √3 × I_ph  (delta connection)<br>
+        Power: P = √3·V_L·I_L·cosφ<br>
+        Energy = Power × Time (kWh = unit of bill)
+      </div>
+      <p class="sm muted" style="margin-bottom:8px;margin-top:8px"><strong>Safety Rules:</strong></p>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:4px">
+        <li class="sm">🟡 Earth wire = safety (green/yellow)</li>
+        <li class="sm">🔴 Live wire = dangerous (red/brown)</li>
+        <li class="sm">🔵 Neutral wire = return path (black/blue)</li>
+        <li class="sm">⚡ MCB = Miniature Circuit Breaker (auto trip)</li>
+        <li class="sm">🔌 ELCB = Earth Leakage Circuit Breaker (shock protection)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     COURSE OUTCOMES
+     ============================================================ -->
+<div class="section" style="margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+  <div class="sec-title">📚 Course Outcomes</div>
+  <div class="card">
+    <div class="card-body">
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+        <li style="font-size:.9rem;color:var(--text);display:flex;gap:8px;align-items:flex-start;">
+          <span style="color:var(--blue);font-weight:600;flex-shrink:0;">✓</span>
+          <span>To understand and analyze basic electric and magnetic circuits</span>
+        </li>
+        <li style="font-size:.9rem;color:var(--text);display:flex;gap:8px;align-items:flex-start;">
+          <span style="color:var(--blue);font-weight:600;flex-shrink:0;">✓</span>
+          <span>To study the working principles of electrical machines and power converters</span>
+        </li>
+        <li style="font-size:.9rem;color:var(--text);display:flex;gap:8px;align-items:flex-start;">
+          <span style="color:var(--blue);font-weight:600;flex-shrink:0;">✓</span>
+          <span>To introduce the components of low voltage electrical installations</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     LEARNING RESOURCES
+     ============================================================ -->
+<div class="section">
+  <div class="sec-title">📖 Learning Resources</div>
+  <div class="card">
+    <div class="card-body">
+      <ol style="list-style-position:inside;display:flex;flex-direction:column;gap:10px;margin-left:0;padding-left:0;">
+        <li style="font-size:.88rem;color:var(--text);line-height:1.5;">Ritu Sahdev, <strong>Basic Electrical Engineering</strong>, Khanna Book Publishing Co. (P) Ltd., Delhi.</li>
+        <li style="font-size:.88rem;color:var(--text);line-height:1.5;">D. P. Kothari and I. J. Nagarth, <strong>"Basic Electrical Engineering"</strong>, Tata McGraw Hill, 2010.</li>
+        <li style="font-size:.88rem;color:var(--text);line-height:1.5;">D. C. Kulshrestha, <strong>"Basic Electrical Engineering"</strong>, McGraw Hill, 2009.</li>
+        <li style="font-size:.88rem;color:var(--text);line-height:1.5;">L. S. Bobrow, <strong>"Fundamentals of Electrical Engineering"</strong>, Oxford University Press, 2011.</li>
+        <li style="font-size:.88rem;color:var(--text);line-height:1.5;">E. Hughes, <strong>"Electrical and Electronics Technology"</strong>, Pearson, 2010.</li>
+        <li style="font-size:.88rem;color:var(--text);line-height:1.5;">V. D. Toro, <strong>"Electrical Engineering Fundamentals"</strong>, Prentice Hall India, 1989.</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<nav class="bnav">
+  <a href="index.html" class="bnav-item"><span class="ni">🏠</span><span>Home</span></a>
+  <a href="physics.html" class="bnav-item"><span class="ni">⚛️</span><span>Physics</span></a>
+  <a href="math.html" class="bnav-item"><span class="ni">📐</span><span>Maths</span></a>
+  <a href="electrical.html" class="bnav-item active"><span class="ni">⚡</span><span>Electrical</span></a>
+</nav>
+
+<script src="script.js"></script>
+<script>
+/* ============================================================
+   ELECTRICAL VISUALIZATIONS
+   ============================================================ */
+
+// ---- KVL Circuit Visualization ----
+window.VIS["vis-kirchhoff"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+  let t = 0;
+
+  function draw() {
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    const W = canvas.width, H = canvas.height;
+    const V = parseInt(document.getElementById('kvl-v').value);
+    const R1 = parseInt(document.getElementById('kvl-r1').value);
+    const R2 = parseInt(document.getElementById('kvl-r2').value);
+    document.getElementById('kvl-v-label').textContent = V + 'V';
+
+    const I = V / (R1 + R2);
+    const V1 = I * R1;
+    const V2 = I * R2;
+
+    // Draw simple circuit (rectangle with components)
+    const mx = 40, my = 40, mw = W - 80, mh = H - 80;
+    ctx.strokeStyle = '#30363d';
+    ctx.lineWidth = 3;
+    ctx.strokeRect(mx, my, mw, mh);
+
+    // Battery (left side)
+    const batX = mx, batY = my + mh / 2;
+    ctx.fillStyle = '#f85149';
+    ctx.beginPath();
+    ctx.moveTo(batX - 3, batY - 20);
+    ctx.lineTo(batX + 3, batY - 20);
+    ctx.moveTo(batX - 8, batY - 10);
+    ctx.lineTo(batX + 8, batY - 10);
+    ctx.moveTo(batX - 3, batY);
+    ctx.lineTo(batX + 3, batY);
+    ctx.moveTo(batX - 8, batY + 10);
+    ctx.lineTo(batX + 8, batY + 10);
+    ctx.lineWidth = 3; ctx.stroke();
+    ctx.fillStyle = '#f85149';
+    ctx.font = 'bold 12px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(`${V}V`, batX - 20, batY + 5);
+
+    // R1 (top)
+    const r1x = mx + mw / 3, r1y = my;
+    ctx.fillStyle = '#f0883e';
+    ctx.fillRect(r1x - 25, r1y - 12, 50, 22);
+    ctx.fillStyle = '#fff';
+    ctx.font = '10px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(`R₁=${R1}Ω`, r1x, r1y + 4);
+    ctx.fillStyle = '#f0883e';
+    ctx.font = '9px sans-serif';
+    ctx.fillText(`V₁=${V1.toFixed(1)}V`, r1x, r1y - 16);
+
+    // R2 (right)
+    const r2x = mx + mw, r2y = my + mh / 2;
+    ctx.fillStyle = '#58a6ff';
+    ctx.fillRect(r2x - 12, r2y - 25, 22, 50);
+    ctx.save();
+    ctx.translate(r2x, r2y);
+    ctx.rotate(Math.PI / 2);
+    ctx.fillStyle = '#fff';
+    ctx.font = '10px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(`R₂=${R2}Ω`, 0, 4);
+    ctx.restore();
+    ctx.fillStyle = '#58a6ff';
+    ctx.font = '9px sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText(`V₂=${V2.toFixed(1)}V`, r2x + 32, r2y - 30);
+
+    // Animated current flow (dots)
+    const pts = [
+      {x: mx, y: my}, {x: mx + mw, y: my},
+      {x: mx + mw, y: my + mh}, {x: mx, y: my + mh}, {x: mx, y: my}
+    ];
+    const totalLen = (mw + mh) * 2;
+    const progress = ((t * 2) % totalLen) / totalLen;
+    let cumLen = 0;
+    for (let seg = 0; seg < pts.length - 1; seg++) {
+      const dx = pts[seg+1].x - pts[seg].x;
+      const dy = pts[seg+1].y - pts[seg].y;
+      const segLen = Math.sqrt(dx*dx + dy*dy) / totalLen;
+      if (progress >= cumLen && progress < cumLen + segLen) {
+        const segProgress = (progress - cumLen) / segLen;
+        const dotX = pts[seg].x + dx * segProgress;
+        const dotY = pts[seg].y + dy * segProgress;
+        ctx.beginPath();
+        ctx.arc(dotX, dotY, 5, 0, Math.PI * 2);
+        ctx.fillStyle = '#3fb950';
+        ctx.fill();
+        break;
+      }
+      cumLen += segLen;
+    }
+
+    // Labels
+    ctx.fillStyle = '#3fb950';
+    ctx.font = 'bold 12px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(`I = V/(R₁+R₂) = ${I.toFixed(2)}A`, W/2, H - 8);
+    ctx.fillStyle = '#8b949e';
+    ctx.font = '10px sans-serif';
+    ctx.fillText(`KVL check: V₁+V₂ = ${(V1+V2).toFixed(1)}V = ${V}V ✓`, W/2, H - 22);
+
+    // Advance animation time; scale with current so changing R/V affects animation speed
+    const speed = Math.min(6, Math.max(0.5, Math.abs(I) * 4));
+    t += speed;
+    wrap._animId = requestAnimationFrame(draw);
+  }
+  if (wrap._animId) cancelAnimationFrame(wrap._animId);
+  draw();
+  document.getElementById('kvl-v').oninput = () => { document.getElementById('kvl-v-label').textContent = document.getElementById('kvl-v').value + 'V'; };
+};
+
+// ---- RC Response ----
+window.VIS["vis-rc"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+
+  function draw() {
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    const W = canvas.width, H = canvas.height;
+    const mode = document.getElementById('rc-mode').value;
+    const tau = parseInt(document.getElementById('rc-tau').value);
+    document.getElementById('rc-tau-label').textContent = tau + 'ms';
+
+    const marginL = 30, marginB = 30;
+    const plotW = W - marginL - 10;
+    const plotH = H - marginB - 10;
+
+    // Axes
+    ctx.strokeStyle = '#30363d';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(marginL, 10);
+    ctx.lineTo(marginL, H - marginB);
+    ctx.lineTo(W - 10, H - marginB);
+    ctx.stroke();
+
+    // Curve
+    ctx.beginPath();
+    ctx.strokeStyle = mode === 'charge' ? '#3fb950' : '#f85149';
+    ctx.lineWidth = 2.5;
+    for (let px = 0; px < plotW; px++) {
+      const tms = (px / plotW) * 5 * tau; // 0 to 5τ
+      let v;
+      if (mode === 'charge') {
+        v = 1 - Math.exp(-tms / tau);
+      } else {
+        v = Math.exp(-tms / tau);
+      }
+      const canvasY = (H - marginB) - v * plotH;
+      px === 0 ? ctx.moveTo(marginL + px, canvasY) : ctx.lineTo(marginL + px, canvasY);
+    }
+    ctx.stroke();
+
+    // τ marker (63.2% for charge, 36.8% for discharge)
+    const tauX = marginL + plotW / 5;
+    const tauY = mode === 'charge' ? (H - marginB) - 0.632 * plotH : (H - marginB) - 0.368 * plotH;
+    ctx.strokeStyle = 'rgba(240,136,62,0.6)';
+    ctx.setLineDash([4,4]);
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(tauX, H - marginB);
+    ctx.lineTo(tauX, tauY);
+    ctx.lineTo(marginL, tauY);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.beginPath();
+    ctx.arc(tauX, tauY, 5, 0, Math.PI * 2);
+    ctx.fillStyle = '#f0883e';
+    ctx.fill();
+    ctx.fillStyle = '#f0883e';
+    ctx.font = '10px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(`τ = ${tau}ms`, tauX, H - marginB + 14);
+    ctx.textAlign = 'right';
+    ctx.fillText(mode === 'charge' ? '63.2%' : '36.8%', marginL - 2, tauY + 4);
+
+    // Labels
+    ctx.fillStyle = '#8b949e';
+    ctx.font = '11px sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText(`${mode === 'charge' ? 'Charging' : 'Discharging'}: τ = RC = ${tau}ms`, marginL + 5, 22);
+    ctx.textAlign = 'center';
+    ctx.fillText('Time →', W/2, H - 4);
+    ctx.fillStyle = mode === 'charge' ? '#3fb950' : '#f85149';
+    ctx.fillText(mode === 'charge' ? 'V = V₀(1−e^(-t/τ))' : 'V = V₀·e^(-t/τ)', W/2, 38);
+  }
+  draw();
+  document.getElementById('rc-mode').onchange = draw;
+  document.getElementById('rc-tau').oninput = draw;
+};
+
+// ---- AC Sine & Phasor ----
+window.VIS["vis-ac"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+  let t = 0;
+
+  function draw() {
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    const W = canvas.width, H = canvas.height;
+    const type = document.getElementById('ac-type').value;
+    let phaseShift = 0;
+    if (type === 'RL') phaseShift = Math.PI / 4;   // I lags V
+    else if (type === 'RC') phaseShift = -Math.PI / 4; // I leads V
+    else if (type === 'RLC') phaseShift = Math.PI / 6;
+
+    // Left half: phasor diagram
+    const phasorCX = W * 0.2, phasorCY = H * 0.5;
+    const phasorR = Math.min(W * 0.15, H * 0.35);
+
+    // Phasor circle
+    ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.arc(phasorCX, phasorCY, phasorR, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // V phasor
+    const vAngle = t;
+    const iAngle = t - phaseShift;
+    function drawPhasor(cx, cy, angle, r, color, label) {
+      const ex = cx + r * Math.cos(angle), ey = cy - r * Math.sin(angle);
+      ctx.strokeStyle = color;
+      ctx.fillStyle = color;
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy); ctx.lineTo(ex, ey); ctx.stroke();
+      const ang = Math.atan2(ey - cy, ex - cx);
+      ctx.beginPath();
+      ctx.moveTo(ex, ey);
+      ctx.lineTo(ex - 8*Math.cos(ang-0.4), ey - 8*Math.sin(ang-0.4));
+      ctx.lineTo(ex - 8*Math.cos(ang+0.4), ey - 8*Math.sin(ang+0.4));
+      ctx.fill();
+      ctx.font = 'bold 11px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(label, ex + 10*Math.cos(ang), ey + 10*Math.sin(ang));
+    }
+    drawPhasor(phasorCX, phasorCY, vAngle, phasorR, '#f0883e', 'V');
+    drawPhasor(phasorCX, phasorCY, iAngle, phasorR * 0.8, '#3fb950', 'I');
+
+    // Right half: sine waves
+    const waveX = W * 0.38;
+    const waveW = W - waveX - 10;
+    const waveCY = H / 2;
+    const amp = H * 0.35;
+
+    // Draw V wave
+    ctx.beginPath();
+    ctx.strokeStyle = '#f0883e';
+    ctx.lineWidth = 2;
+    for (let px = 0; px < waveW; px++) {
+      const wt = vAngle + (px / waveW) * Math.PI * 3;
+      const y = waveCY - amp * Math.sin(wt);
+      px === 0 ? ctx.moveTo(waveX + px, y) : ctx.lineTo(waveX + px, y);
+    }
+    ctx.stroke();
+
+    // Draw I wave
+    ctx.beginPath();
+    ctx.strokeStyle = '#3fb950';
+    ctx.lineWidth = 2;
+    for (let px = 0; px < waveW; px++) {
+      const wt = iAngle + (px / waveW) * Math.PI * 3;
+      const y = waveCY - amp * 0.7 * Math.sin(wt);
+      px === 0 ? ctx.moveTo(waveX + px, y) : ctx.lineTo(waveX + px, y);
+    }
+    ctx.stroke();
+
+    // Zero line
+    ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([3,3]);
+    ctx.beginPath(); ctx.moveTo(waveX, waveCY); ctx.lineTo(W, waveCY); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Labels
+    ctx.fillStyle = '#f0883e'; ctx.font = '10px sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText('— V', waveX + 3, 18);
+    ctx.fillStyle = '#3fb950';
+    ctx.fillText('— I', waveX + 30, 18);
+
+    const pf = Math.cos(phaseShift);
+    ctx.fillStyle = '#58a6ff';
+    ctx.font = '11px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(`φ = ${(phaseShift*180/Math.PI).toFixed(0)}°  |  PF = cos(φ) = ${pf.toFixed(2)}`, W/2, H - 8);
+
+    t += 0.04;
+    wrap._animId = requestAnimationFrame(draw);
+  }
+  if (wrap._animId) cancelAnimationFrame(wrap._animId);
+  draw();
+};
+
+// ---- Transformer Visualization ----
+
+window.VIS["vis-transformer"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+  let t = 0;
+
+  function draw() {
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    const W = canvas.width, H = canvas.height;
+    const N1 = parseInt(document.getElementById('trans-n1').value);
+    const N2 = parseInt(document.getElementById('trans-n2').value);
+    document.getElementById('trans-n1-label').textContent = N1;
+    document.getElementById('trans-n2-label').textContent = N2;
+    const ratio = N2 / N1;
+
+    const cx = W / 2, cy = H / 2;
+    // Iron core
+    ctx.fillStyle = '#21262d';
+    ctx.strokeStyle = '#8b949e';
+    ctx.lineWidth = 2;
+    ctx.fillRect(cx - 50, cy - 55, 100, 110);
+    ctx.strokeRect(cx - 50, cy - 55, 100, 110);
+    ctx.fillStyle = '#30363d';
+    ctx.fillRect(cx - 35, cy - 40, 70, 80);
+
+    // Primary coil (left)
+    ctx.strokeStyle = '#58a6ff';
+    ctx.lineWidth = 2;
+    for (let i = 0; i < N1; i++) {
+      const y = cy - (N1 - 1) * 6 + i * 12;
+      ctx.beginPath();
+      ctx.arc(cx - 50, y, 8, Math.PI * 0.5, Math.PI * 1.5, true);
+      ctx.stroke();
+    }
+
+    // Secondary coil (right)
+    ctx.strokeStyle = '#f0883e';
+    for (let i = 0; i < N2; i++) {
+      const y = cy - (N2 - 1) * 6 + i * 12;
+      ctx.beginPath();
+      ctx.arc(cx + 50, y, 8, Math.PI * 0.5, Math.PI * 1.5);
+      ctx.stroke();
+    }
+
+    // Animated flux in core (pulsing dots)
+    const fluxIntensity = Math.abs(Math.sin(t * 0.06));
+    for (let fx = cx - 33; fx < cx + 33; fx += 12) {
+      for (let fy = cy - 38; fy < cy + 38; fy += 12) {
+        ctx.beginPath();
+        ctx.arc(fx, fy, 2, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(188,140,255,${fluxIntensity * 0.8})`;
+        ctx.fill();
+      }
+    }
+
+    // Input sine wave (small)
+    const waveH = 20, waveW = 60;
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(88,166,255,0.6)';
+    ctx.lineWidth = 1.5;
+    for (let px = 0; px < waveW; px++) {
+      const y = cy - waveH * Math.sin((px / waveW) * Math.PI * 2 + t * 0.1);
+      px === 0 ? ctx.moveTo(cx - 120 + px, y) : ctx.lineTo(cx - 120 + px, y);
+    }
+    ctx.stroke();
+
+    // Output sine wave (scaled)
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(240,136,62,0.6)';
+    for (let px = 0; px < waveW; px++) {
+      const y = cy - waveH * ratio * Math.sin((px / waveW) * Math.PI * 2 + t * 0.1);
+      if (Math.abs(cy - y) > 70) continue;
+      px === 0 ? ctx.moveTo(cx + 70 + px, y) : ctx.lineTo(cx + 70 + px, y);
+    }
+    ctx.stroke();
+
+    // Labels
+    ctx.fillStyle = '#58a6ff';
+    ctx.font = 'bold 11px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(`N₁ = ${N1}`, cx - 75, cy - N1 * 6 - 18);
+    ctx.fillText(`V₁ = 100V`, cx - 85, H - 10);
+    ctx.fillStyle = '#f0883e';
+    ctx.fillText(`N₂ = ${N2}`, cx + 75, cy - N2 * 6 - 18);
+    ctx.fillText(`V₂ = ${(100 * ratio).toFixed(0)}V`, cx + 85, H - 10);
+    ctx.fillStyle = '#bc8cff';
+    ctx.fillText(`Turns ratio = ${N1}:${N2} → ${ratio >= 1 ? 'Step-UP' : 'Step-DOWN'}`, cx, 18);
+
+    t++;
+    wrap._animId = requestAnimationFrame(draw);
+  }
+  if (wrap._animId) cancelAnimationFrame(wrap._animId);
+  draw();
+};
+
+// ---- DC Motor/Generator ----
+
+window.VIS["vis-dcmotor"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+  let t = 0;
+
+  function draw() {
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    const W = canvas.width, H = canvas.height;
+    const speed = parseInt(document.getElementById('motor-speed').value);
+    const type = document.getElementById('motor-type').value;
+    const cx = W / 2, cy = H / 2;
+    const r = Math.min(cx, cy) - 30;
+
+    // Stator (outer ring)
+    ctx.strokeStyle = '#30363d';
+    ctx.lineWidth = 12;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Magnetic poles (N/S)
+    ctx.fillStyle = '#f85149';
+    ctx.beginPath(); ctx.arc(cx, cy - r, 14, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#fff'; ctx.font = 'bold 10px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('N', cx, cy - r + 4);
+    ctx.fillStyle = '#58a6ff';
+    ctx.beginPath(); ctx.arc(cx, cy + r, 14, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#fff';
+    ctx.fillText('S', cx, cy + r + 4);
+
+    // Rotor coil (rotating)
+    const angle = t * 0.03 * speed * (type === 'gen' ? -1 : 1);
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(angle);
+    ctx.strokeStyle = '#f0883e';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(-r * 0.6, 0); ctx.lineTo(r * 0.6, 0);
+    ctx.stroke();
+    // Coil sides (circles at ends)
+    ctx.beginPath(); ctx.arc(r * 0.6, 0, 6, 0, Math.PI * 2);
+    ctx.fillStyle = '#f0883e'; ctx.fill();
+    ctx.beginPath(); ctx.arc(-r * 0.6, 0, 6, 0, Math.PI * 2); ctx.fill();
+    // Coil (simplified)
+    ctx.strokeStyle = 'rgba(240,136,62,0.4)';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.ellipse(0, 0, r * 0.55, r * 0.3, 0, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.restore();
+
+    // Arrow showing rotation
+    const arrowR = r + 22;
+    ctx.strokeStyle = type === 'motor' ? '#3fb950' : '#bc8cff';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(cx, cy, arrowR, -0.4, Math.PI * 0.6);
+    ctx.stroke();
+    const arrowEndAngle = Math.PI * 0.6;
+    const arrowTipX = cx + arrowR * Math.cos(arrowEndAngle);
+    const arrowTipY = cy + arrowR * Math.sin(arrowEndAngle);
+    ctx.beginPath();
+    ctx.moveTo(arrowTipX, arrowTipY);
+    ctx.lineTo(arrowTipX - 8, arrowTipY - 6);
+    ctx.lineTo(arrowTipX + 2, arrowTipY - 10);
+    ctx.fillStyle = type === 'motor' ? '#3fb950' : '#bc8cff';
+    ctx.fill();
+
+    // Labels
+    ctx.fillStyle = type === 'motor' ? '#3fb950' : '#bc8cff';
+    ctx.font = 'bold 12px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(type === 'motor' ? '⚡→ Rotation (Motor)' : '↻ → ⚡ (Generator)', W/2, 20);
+    ctx.fillStyle = '#8b949e';
+    ctx.font = '10px sans-serif';
+    ctx.fillText(type === 'motor' ? 'F = BIL (Lorentz force)' : 'EMF = Blv (Faraday)', W/2, H - 8);
+
+    t++;
+    wrap._animId = requestAnimationFrame(draw);
+  }
+  if (wrap._animId) cancelAnimationFrame(wrap._animId);
+  draw();
+  document.getElementById('motor-speed').oninput = () => {};
+  document.getElementById('motor-type').onchange = () => {};
+};
+
+// ---- Rotating Magnetic Field ----
+
+window.VIS["vis-rmf"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+  let t = 0;
+
+  function draw() {
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    const W = canvas.width, H = canvas.height;
+    const cx = W / 2, cy = H / 2;
+    const r = 80;
+
+    // Stator windings (3-phase, 120° apart)
+    const phases = [
+      {angle: 0, color: '#f85149', label: 'R'},
+      {angle: 2*Math.PI/3, color: '#3fb950', label: 'Y'},
+      {angle: 4*Math.PI/3, color: '#58a6ff', label: 'B'},
+    ];
+
+    // Draw 3-phase sine waves (bottom left)
+    const waveX = 10, waveY = H - 50, waveW = 120, waveH = 20;
+    for (const p of phases) {
+      ctx.beginPath();
+      ctx.strokeStyle = p.color;
+      ctx.lineWidth = 1.5;
+      for (let px = 0; px < waveW; px++) {
+        const wt = (px / waveW) * Math.PI * 2 + t * 0.05;
+        const y = waveY - Math.sin(wt + p.angle) * waveH;
+        px === 0 ? ctx.moveTo(waveX + px, y) : ctx.lineTo(waveX + px, y);
+      }
+      ctx.stroke();
+    }
+    ctx.fillStyle = '#8b949e'; ctx.font = '9px sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText('3-phase AC (120° apart)', waveX, H - 8);
+
+    // Stator circle
+    ctx.strokeStyle = '#30363d';
+    ctx.lineWidth = 10;
+    ctx.beginPath(); ctx.arc(cx, cy, r + 20, 0, Math.PI * 2); ctx.stroke();
+
+    // Phase windings
+    for (const p of phases) {
+      const wx = cx + (r + 20) * Math.cos(p.angle);
+      const wy = cy + (r + 20) * Math.sin(p.angle);
+      const curr = Math.sin(t * 0.05 + p.angle);
+      ctx.beginPath();
+      ctx.arc(wx, wy, 8, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = 0.4 + Math.abs(curr) * 0.6;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = '#fff';
+      ctx.font = 'bold 8px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(p.label, wx, wy + 3);
+    }
+
+    // Rotor (rotating)
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(t * 0.05);
+    ctx.strokeStyle = '#bc8cff';
+    ctx.lineWidth = 4;
+    ctx.beginPath(); ctx.moveTo(-r * 0.6, 0); ctx.lineTo(r * 0.6, 0); ctx.stroke();
+    ctx.beginPath(); ctx.arc(r * 0.6, 0, 6, 0, Math.PI*2);
+    ctx.fillStyle = '#bc8cff'; ctx.fill();
+    ctx.restore();
+
+    // Rotating B field arrow
+    const bAngle = t * 0.05 + Math.PI/4;
+    ctx.strokeStyle = '#f0883e';
+    ctx.fillStyle = '#f0883e';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + r * 0.7 * Math.cos(bAngle), cy + r * 0.7 * Math.sin(bAngle));
+    ctx.stroke();
+    const bex = cx + r * 0.7 * Math.cos(bAngle);
+    const bey = cy + r * 0.7 * Math.sin(bAngle);
+    ctx.beginPath();
+    ctx.moveTo(bex, bey);
+    ctx.lineTo(bex - 8*Math.cos(bAngle-0.4), bey - 8*Math.sin(bAngle-0.4));
+    ctx.lineTo(bex - 8*Math.cos(bAngle+0.4), bey - 8*Math.sin(bAngle+0.4));
+    ctx.fill();
+    ctx.fillStyle = '#f0883e'; ctx.font = '10px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('B (RMF)', bex + 15*Math.cos(bAngle), bey + 15*Math.sin(bAngle));
+
+    ctx.fillStyle = '#bc8cff';
+    ctx.font = 'bold 12px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Rotating Magnetic Field → Rotor Spins', cx, H - 8);
+
+    t++;
+    wrap._animId = requestAnimationFrame(draw);
+  }
+  if (wrap._animId) cancelAnimationFrame(wrap._animId);
+  draw();
+};
+
+// ---- Rectifier ----
+window.VIS["vis-rectifier"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+
+  function draw() {
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    const W = canvas.width, H = canvas.height;
+    const type = document.getElementById('rect-type').value;
+
+    const marginL = 20, marginB = 25;
+    const plotW = W - marginL - 10;
+    const plotH = H - marginB - 15;
+    const cy = H / 2;
+
+    // Original AC
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(88,166,255,0.4)';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([3,3]);
+    for (let px = 0; px < plotW; px++) {
+      const t = (px / plotW) * 4 * Math.PI;
+      const y = cy - Math.sin(t) * (plotH / 2 - 10);
+      px === 0 ? ctx.moveTo(marginL + px, y) : ctx.lineTo(marginL + px, y);
+    }
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Rectified output
+    ctx.beginPath();
+    ctx.strokeStyle = '#3fb950';
+    ctx.lineWidth = 2.5;
+    for (let px = 0; px < plotW; px++) {
+      const t = (px / plotW) * 4 * Math.PI;
+      let v;
+      if (type === 'hw') {
+        v = Math.max(0, Math.sin(t));
+      } else if (type === 'fw') {
+        v = Math.abs(Math.sin(t));
+      } else { // fwc (with filter cap)
+        v = 0.9 + 0.1 * Math.abs(Math.sin(t));
+      }
+      const y = (H - marginB) - v * (plotH - 10);
+      px === 0 ? ctx.moveTo(marginL + px, y) : ctx.lineTo(marginL + px, y);
+    }
+    ctx.stroke();
+
+    // DC average line
+    const dcAvg = type === 'hw' ? 0.318 : type === 'fw' ? 0.636 : 0.95;
+    const dcY = (H - marginB) - dcAvg * (plotH - 10);
+    ctx.strokeStyle = 'rgba(240,136,62,0.6)';
+    ctx.setLineDash([4,4]);
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(marginL, dcY); ctx.lineTo(W, dcY); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#f0883e';
+    ctx.font = '10px sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText(`V_dc = ${(dcAvg*100).toFixed(0)}% V_m`, marginL + 4, dcY - 5);
+
+    // Axes
+    ctx.strokeStyle = '#30363d';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(marginL, 10); ctx.lineTo(marginL, H - marginB);
+    ctx.lineTo(W, H - marginB);
+    ctx.stroke();
+
+    ctx.fillStyle = '#8b949e'; ctx.font = '10px sans-serif'; ctx.textAlign = 'center';
+    const names = {hw:'Half-Wave Rectifier', fw:'Full-Wave Bridge Rectifier', fwc:'Full-Wave + Capacitor Filter'};
+    ctx.fillText(names[type], W/2, 18);
+    ctx.fillStyle = '#3fb950'; ctx.fillText('— DC output', W/2 - 40, H - 6);
+    ctx.fillStyle = 'rgba(88,166,255,0.6)'; ctx.fillText('--- AC input', W/2 + 40, H - 6);
+  }
+  draw();
+  document.getElementById('rect-type').onchange = draw;
+};
+
+// ============================================================
+//  QUIZZES
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+  initQuiz('quiz-dc', [
+    {q: 'KCL states that at any node, sum of currents is:', opts:['Zero','Maximum','Infinite','Equal to voltage'], answer:0, explanation:'ΣI = 0 at any node — currents entering = currents leaving'},
+    {q: 'Two 4Ω resistors in parallel give:', opts:['8Ω','4Ω','2Ω','1Ω'], answer:2, explanation:'1/R = 1/4 + 1/4 = 2/4, so R = 2Ω'},
+    {q: 'Time constant of RC circuit is:', opts:['R/C','RC','R+C','C/R'], answer:1, explanation:'τ = RC; at t=τ, voltage reaches 63.2% of final value'},
+  ]);
+
+  initQuiz('quiz-ac', [
+    {q: 'V_rms for a sinusoidal wave of peak V_m is:', opts:['V_m','V_m/2','V_m/√2','2V_m'], answer:2, explanation:'V_rms = V_m/√2 ≈ 0.707 V_m'},
+    {q: 'In a purely inductive circuit, current:', opts:['Leads V by 90°','Lags V by 90°','Is in phase','Lags by 45°'], answer:1, explanation:'For inductor, voltage leads current (or current lags) by 90°'},
+    {q: 'Power factor cosφ = 1 means:', opts:['Pure inductor','Pure capacitor','Pure resistor','Open circuit'], answer:2, explanation:'cosφ = 1 → φ = 0° → no reactive power → purely resistive'},
+  ]);
+
+  initQuiz('quiz-elec', [
+    {q: 'Transformer works on which principle?', opts:['Coulombs law','Mutual inductance','KVL','Ohms law'], answer:1, explanation:'Transformer uses mutual inductance — changing flux in primary induces EMF in secondary'},
+    {q: 'For step-up transformer, N₂ is:', opts:['Less than N₁','Equal to N₁','Greater than N₁','Zero'], answer:2, explanation:'Step-up: V₂ > V₁ ∴ N₂ > N₁ (V₂/V₁ = N₂/N₁)'},
+  ]);
+});
+</script>
+</body>
+</html>
