@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Mathematics | SnapLearn CEMK</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="logo">← <span>Mathematics</span></a>
+  <button class="theme-btn" id="themeBtn">☀️</button>
+</header>
+
+<div class="topic-nav">
+  <a href="#integration" class="tpill">∫ Integration</a>
+  <a href="#mvt"         class="tpill">∂ Differentiation</a>
+  <a href="#matrices"    class="tpill">[] Matrices</a>
+  <a href="#vectors"     class="tpill">↗ Vector Spaces</a>
+  <a href="#eigen"       class="tpill">λ Eigenvalues</a>
+</div>
+
+<div class="container">
+
+<!-- ══════════════════════════════════════════
+     INTEGRATION
+══════════════════════════════════════════ -->
+<div class="section" id="integration">
+<div class="sec-title">∫ Calculus — Integration (Module 1)</div>
+
+<div class="collap">
+  <div class="collap-hd">Definite &amp; Improper Integrals — Area Under Curve <span class="collap-arrow">▼</span></div>
+  <div class="collap-bd">
+    <div class="row mb10"><span class="tag tag-exam">⭐ Exam Fav</span><span class="tag tag-vis">🎬 Animation</span></div>
+    <p class="sm muted mb10">The definite integral ∫ₐᵇ f(x)dx gives the exact area under f(x) from a to b. We approximate with Riemann rectangles — more rectangles = more accurate.</p>
+
+    <button class="btn btn-purple btn-sm" data-eli5="eli5int">🧠 Explain Like I'm Weak</button>
+    <div class="eli5" id="eli5int">
+      <div class="eli5-head">🧠 Super Simple</div>
+      <p>Imagine painting the area under a curve by filling it with thin rectangles. More rectangles = less gaps. As width → 0 and count → ∞, the total rectangle area = exact area. That's integration!</p>
+    </div>
+
+    <div class="formula">∫ xⁿ dx = xⁿ⁺¹/(n+1) + C   (n ≠ −1)
+∫ eˣ dx = eˣ + C
+∫ sin x dx = −cos x + C
+∫ (1/x) dx = ln|x| + C
+∫ₐᵇ f(x)dx = F(b) − F(a)  [Fundamental Theorem]
+By Parts: ∫u dv = uv − ∫v du</div>
+
+    <div class="card" style="background:var(--surface2);margin:8px 0">
+      <div class="card-title" style="font-size:.85rem">📝 Practice</div>
+      <div class="card-body sm">
+        <p>1. ∫ x² dx = x³/3 + C</p>
+        <p>2. ∫₀¹ x² dx = [x³/3]₀¹ = 1/3</p>
+        <p>3. ∫ x·eˣ dx = eˣ(x−1) + C  [IBP: u=x, dv=eˣdx]</p>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-sm" data-vis="vINTEG">🎬 Visualize — Area &amp; Riemann Sums</button>
+    <div class="vis-wrap" id="vINTEG">
+      <canvas data-h="220"></canvas>
+      <div class="vis-ctrl">
+        <label>Function</label>
+        <select id="integF">
+          <option value="x2">x²</option>
+          <option value="sinx">sin(x)</option>
+          <option value="ex">eˣ/4</option>
+          <option value="x3">x³/2</option>
+        </select>
+        <label>Rectangles n =</label>
+        <input type="range" id="integN" min="2" max="50" value="8">
+        <span id="integNlbl" style="font-weight:700;color:var(--green)">8</span>
+        <label>Upper limit</label>
+        <input type="range" id="integB" min="10" max="90" value="60">
+      </div>
+      <div class="vis-info" id="integInfo"></div>
+    </div>
+
+    <div class="divider"></div>
+    <div id="qINTEG"></div>
+  </div>
+</div>
+
+<div class="collap">
+  <div class="collap-hd">Beta &amp; Gamma Functions <span class="collap-arrow">▼</span></div>
+  <div class="collap-bd">
+    <div class="row mb10"><span class="tag tag-exam">⭐ Exam Hot</span></div>
+    <p class="sm muted mb10">Gamma extends factorials to non-integers. Beta connects two Gamma functions. These appear in probability distributions and engineering integrals.</p>
+    <div class="formula">Γ(n) = ∫₀^∞ x^(n−1)·e^(−x) dx
+Γ(n) = (n−1)·Γ(n−1)  →  Γ(n) = (n−1)!  [integer n]
+Γ(1/2) = √π
+B(m,n) = Γ(m)·Γ(n) / Γ(m+n)
+B(m,n) = ∫₀¹ x^(m−1)·(1−x)^(n−1) dx</div>
+    <button class="btn btn-primary btn-sm" data-vis="vGAMMA">🎬 Visualize — Gamma Function</button>
+    <div class="vis-wrap" id="vGAMMA">
+      <canvas data-h="200"></canvas>
+    </div>
+  </div>
+</div>
+
+<div class="collap">
+  <div class="collap-hd">Volume of Revolution <span class="collap-arrow">▼</span></div>
+  <div class="collap-bd">
+    <div class="row mb10"><span class="tag tag-exam">⭐ Exam</span></div>
+    <p class="sm muted mb10">Rotate a 2D curve around an axis → 3D solid. Disk method: V = π∫[f(x)]²dx. Used to find volumes of cones, spheres, cylinders.</p>
+    <div class="formula">Disk method:  V = π∫ₐᵇ [f(x)]² dx
+Shell method: V = 2π∫ₐᵇ x·f(x) dx
+Surface area: S = 2π∫ₐᵇ f(x)√(1+[f'(x)]²) dx</div>
+    <button class="btn btn-primary btn-sm" data-vis="vREV">🎬 Visualize — Revolution Solid</button>
+    <div class="vis-wrap" id="vREV">
+      <canvas data-h="200"></canvas>
+      <div class="vis-ctrl">
+        <label>Rotation angle</label>
+        <input type="range" id="revAngle" min="10" max="360" value="180">
+        <span id="revAngleLbl" style="font-weight:700;color:var(--orange)">180°</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div><!-- /integration -->
+
+<!-- ══════════════════════════════════════════
+     DIFFERENTIATION
+══════════════════════════════════════════ -->
+<div class="section" id="mvt">
+<div class="sec-title">∂ Calculus — Differentiation (Module 2)</div>
+
+<div class="collap">
+  <div class="collap-hd">Rolle's Theorem &amp; Mean Value Theorem <span class="collap-arrow">▼</span></div>
+  <div class="collap-bd">
+    <div class="row mb10"><span class="tag tag-exam">⭐ Exam</span><span class="tag tag-vis">🎬 Animation</span></div>
+    <p class="sm muted mb10">Rolle's: if f(a)=f(b) and f is continuous/differentiable, ∃ c∈(a,b) where f'(c)=0 (horizontal tangent). MVT generalises: tangent at c = slope of secant AB.</p>
+    <div class="formula">Rolle's: f(a)=f(b) → ∃c: f'(c) = 0
+MVT: ∃c∈(a,b): f'(c) = [f(b)−f(a)] / (b−a)
+Lagrange's form: f(b) = f(a) + (b−a)f'(c)</div>
+    <button class="btn btn-primary btn-sm" data-vis="vMVT">🎬 Visualize — MVT Tangent</button>
+    <div class="vis-wrap" id="vMVT">
+      <canvas data-h="210"></canvas>
+      <div class="vis-ctrl">
+        <label>Function</label>
+        <select id="mvtF">
+          <option value="sine">sin(x)</option>
+          <option value="cubic">x³−3x</option>
+          <option value="quad">x²−2x</option>
+        </select>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div id="qDIFF"></div>
+  </div>
+</div>
+
+<div class="collap">
+  <div class="collap-hd">Taylor's &amp; Maclaurin's Series <span class="collap-arrow">▼</span></div>
+  <div class="collap-bd">
+    <div class="row mb10"><span class="tag tag-exam">⭐ Exam</span></div>
+    <p class="sm muted mb10">Express any smooth function as an infinite polynomial. Add more terms → better approximation. Maclaurin = Taylor centred at x=0.</p>
+    <div class="formula">Taylor:    f(x) = Σ f^(n)(a)/n! · (x−a)ⁿ
+Maclaurin (a=0):
+  sin x = x − x³/3! + x⁵/5! − …
+  cos x = 1 − x²/2! + x⁴/4! − …
+  eˣ   = 1 + x + x²/2! + x³/3! + …
+  ln(1+x) = x − x²/2 + x³/3 − …</div>
+    <button class="btn btn-primary btn-sm" data-vis="vTAYLOR">🎬 Visualize — Series Approximation</button>
+    <div class="vis-wrap" id="vTAYLOR">
+      <canvas data-h="200"></canvas>
+      <div class="vis-ctrl">
+        <label>Function</label>
+        <select id="taylorF"><option value="sin">sin(x)</option><option value="cos">cos(x)</option><option value="ex">eˣ</option></select>
+        <label>Terms</label>
+        <input type="range" id="taylorN" min="1" max="8" value="2">
+        <span id="taylorNlbl" style="font-weight:700;color:var(--blue)">2</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="collap">
+  <div class="collap-hd">Maxima &amp; Minima <span class="collap-arrow">▼</span></div>
+  <div class="collap-bd">
+    <div class="row mb10"><span class="tag tag-exam">⭐ Exam</span><span class="tag tag-vis">🎬 Animation</span></div>
+    <p class="sm muted mb10">At max/min: f'(x)=0 (critical point). If f''(x) &lt; 0 → local max (hill). If f''(x) &gt; 0 → local min (valley). Tangent line is horizontal at both.</p>
+    <div class="formula">Critical points: f'(x) = 0
+Second derivative test:
+  f''(c) < 0  →  local MAX
+  f''(c) > 0  →  local MIN
+  f''(c) = 0  →  inconclusive (use 3rd deriv)</div>
+    <button class="btn btn-primary btn-sm" data-vis="vMAXMIN">🎬 Visualize — Max &amp; Min Detection</button>
+    <div class="vis-wrap" id="vMAXMIN">
+      <canvas data-h="210"></canvas>
+      <div class="vis-ctrl">
+        <label>Coefficient a</label>
+        <input type="range" id="mmA" min="-30" max="30" value="10">
+        <label>Tangent at x</label>
+        <input type="range" id="mmX" min="-40" max="40" value="0">
+      </div>
+    </div>
+  </div>
+</div>
+</div><!-- /differentiation -->
+
+<!-- ══════════════════════════════════════════
+     MATRICES
+══════════════════════════════════════════ -->
+<div class="section" id="matrices">
+<div class="sec-title">[] Matrices (Module 3)</div>
+
+<div class="collap">
+  <div class="collap-hd">Determinants, Rank &amp; Gauss Elimination <span class="collap-arrow">▼</span></div>
+  <div class="collap-bd">
+    <div class="row mb10"><span class="tag tag-exam">⭐ Exam</span></div>
+    <p class="sm muted mb10">Determinant = scalar that encodes geometric scaling. Rank = number of linearly independent rows. Gauss-Jordan converts matrix to RREF to solve systems.</p>
+    <div class="formula">det([[a,b],[c,d]]) = ad − bc
+Inverse: A⁻¹ = adj(A)/det(A)   [if det≠0]
+Cramer's rule: x_i = det(Aᵢ)/det(A)
+Rank(A) = max linearly independent rows
+Row ops preserve rank</div>
+    <button class="btn btn-primary btn-sm" data-vis="vGAUSS">🎬 Visualize — Gauss Row Reduction</button>
+    <div class="vis-wrap" id="vGAUSS">
+      <canvas data-h="200"></canvas>
+    </div>
+  </div>
+</div>
+</div><!-- /matrices -->
+
+<!-- ══════════════════════════════════════════
+     VECTOR SPACES
+══════════════════════════════════════════ -->
+<div class="section" id="vectors">
+<div class="sec-title">↗ Vector Spaces (Module 4)</div>
+
+<div class="collap">
+  <div class="collap-hd">Basis, Span &amp; Linear Transformations <span class="collap-arrow">▼</span></div>
+  <div class="collap-bd">
+    <div class="row mb10"><span class="tag tag-exam">⭐ Exam</span><span class="tag tag-vis">🎬 Animation</span></div>
+    <p class="sm muted mb10">A vector space is a set where you can add vectors and scale them. A basis is the minimum set of vectors that can express everything in the space. A linear transformation stretches/rotates space — represented by a matrix.</p>
+    <div class="formula">Linear independence: c₁v₁+c₂v₂+…= 0 only if all cᵢ=0
+Span: all linear combinations of a set
+Basis: linearly independent set that spans the space
+dim(V) = number of basis vectors
+Range (R) and Kernel (N): Rank-Nullity: rank + nullity = n</div>
+    <button class="btn btn-primary btn-sm" data-vis="vTRANSF">🎬 Visualize — Matrix Transformation</button>
+    <div class="vis-wrap" id="vTRANSF">
+      <canvas data-h="250"></canvas>
+      <div class="vis-ctrl">
+        <label>Transform</label>
+        <select id="transfT">
+          <option value="rot">Rotation 45°</option>
+          <option value="scale">Scaling (2x, 0.5y)</option>
+          <option value="shear">Shear</option>
+          <option value="reflect">Reflection (y-axis)</option>
+        </select>
+        <label>Amount</label>
+        <input type="range" id="transfP" min="0" max="100" value="50">
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div id="qVEC"></div>
+  </div>
+</div>
+
+<div class="collap">
+  <div class="collap-hd">Gram-Schmidt Orthogonalisation <span class="collap-arrow">▼</span></div>
+  <div class="collap-bd">
+    <div class="row mb10"><span class="tag tag-exam">⭐ Exam</span></div>
+    <p class="sm muted mb10">Given non-orthogonal vectors, Gram-Schmidt creates orthonormal basis by subtracting projections one by one.</p>
+    <div class="formula">Given: {v₁, v₂, v₃, …}
+u₁ = v₁
+u₂ = v₂ − (v₂·u₁/|u₁|²)u₁
+u₃ = v₃ − (v₃·u₁/|u₁|²)u₁ − (v₃·u₂/|u₂|²)u₂
+Normalise: eᵢ = uᵢ/|uᵢ|</div>
+    <button class="btn btn-primary btn-sm" data-vis="vGS">🎬 Visualize — Gram-Schmidt</button>
+    <div class="vis-wrap" id="vGS">
+      <canvas data-h="220"></canvas>
+    </div>
+  </div>
+</div>
+</div><!-- /vectors -->
+
+<!-- ══════════════════════════════════════════
+     EIGENVALUES
+══════════════════════════════════════════ -->
+<div class="section" id="eigen">
+<div class="sec-title">λ Eigenvalues &amp; Eigenvectors (Module 5)</div>
+
+<div class="collap">
+  <div class="collap-hd">⭐ Eigenvalues — Char. Equation &amp; Geometric Meaning <span class="collap-arrow">▼</span></div>
+  <div class="collap-bd">
+    <div class="row mb10"><span class="tag tag-hot">🔥 Very Hot</span><span class="tag tag-vis">🎬 Animation</span></div>
+    <p class="sm muted mb10">A matrix transforms all vectors (rotates+stretches). Eigenvectors are SPECIAL — they only get STRETCHED (never rotated). The stretch factor is the eigenvalue λ.</p>
+
+    <button class="btn btn-purple btn-sm" data-eli5="eli5eigen">🧠 Explain Like I'm Weak</button>
+    <div class="eli5" id="eli5eigen">
+      <div class="eli5-head">🧠 Super Simple</div>
+      <p>Matrix = machine that twists and pulls vectors. Most arrows change direction. But eigenvectors are like arrows on a rubber band — they only stretch longer or shorter, NEVER turn. λ = how much they stretch. λ=2 means doubled!</p>
+    </div>
+
+    <div class="formula pu">Char. equation:  det(A − λI) = 0
+For 2×2: λ² − (trace)λ + det(A) = 0
+trace = a₁₁ + a₂₂ = λ₁ + λ₂
+det(A) = λ₁·λ₂
+Find eigenvector: (A − λI)v = 0
+Diagonalisation: A = P·D·P⁻¹</div>
+
+    <div class="card" style="background:var(--surface2);margin:8px 0">
+      <div class="card-title" style="font-size:.85rem">📝 Worked Example</div>
+      <div class="card-body sm">
+        <p>A = [[3, 1], [0, 2]]</p>
+        <p>det(A−λI) = (3−λ)(2−λ) = 0  →  λ₁=3, λ₂=2</p>
+        <p>For λ₁=3: (A−3I)v=0 → v₁=[1,0]</p>
+        <p>For λ₂=2: (A−2I)v=0 → v₂=[1,−1]</p>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-sm" data-vis="vEIGEN">🎬 Visualize — Eigenvectors Don't Rotate</button>
+    <div class="vis-wrap" id="vEIGEN">
+      <canvas data-h="250"></canvas>
+      <div class="vis-ctrl">
+        <label>a₁₁</label><input type="range" id="eigA" min="-20" max="30" value="20">
+        <label>a₁₂</label><input type="range" id="eigB" min="-20" max="20" value="5">
+        <label>a₂₂</label><input type="range" id="eigD" min="-20" max="30" value="10">
+        <label>Transform t</label><input type="range" id="eigT" min="0" max="100" value="0">
+      </div>
+      <div class="vis-info" id="eigenInfo"></div>
+    </div>
+
+    <div class="divider"></div>
+    <div id="qEIGEN"></div>
+  </div>
+</div>
+</div><!-- /eigen -->
+
+</div><!-- /container -->
+
+<nav class="bnav">
+  <a href="index.html" class="bnav-item"><span class="ni">🏠</span><span>Home</span></a>
+  <a href="physics.html" class="bnav-item"><span class="ni">⚛️</span><span>Physics</span></a>
+  <a href="math.html" class="bnav-item active"><span class="ni">📐</span><span>Maths</span></a>
+  <a href="electrical.html" class="bnav-item"><span class="ni">⚡</span><span>Electrical</span></a>
+</nav>
+
+<script src="script.js"></script>
+<script>
+/* ════════════════════════════════════════
+   MATH VISUALIZATIONS
+════════════════════════════════════════ */
+
+// ── Integration / Riemann Sums ──────────────────────────────
+window.VIS["vINTEG"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+  function draw() {
+    const W = canvas.width, H = canvas.height;
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, W, H);
+    grid(ctx, W, H);
+    const fn = document.getElementById('integF').value;
+    const n  = parseInt(document.getElementById('integN').value);
+    const bp = parseInt(document.getElementById('integB').value) / 100;
+    document.getElementById('integNlbl').textContent = n;
+
+    const ml = 30, mr = 15, mt = 18, mb = 25;
+    const pw = W - ml - mr, ph = H - mt - mb;
+
+    function f(x) {
+      switch(fn) {
+        case 'x2': return x*x;
+        case 'sinx': return Math.sin(x * Math.PI) + 0.05;
+        case 'ex': return Math.exp(x * 1.5) / 8;
+        case 'x3': return x*x*x / 2;
+      }
+    }
+
+    // Compute scale
+    let maxY = 0;
+    for (let i = 0; i <= 200; i++) { const v = f(i/200); if (v > maxY) maxY = v; }
+    maxY = maxY || 1;
+
+    // Riemann rectangles
+    const rw = (bp * pw) / n;
+    let rArea = 0;
+    for (let i = 0; i < n; i++) {
+      const xL = i / n * bp, xR = (i+1) / n * bp;
+      const xM = (xL + xR) / 2;
+      const h = f(xM);
+      rArea += h * (xR - xL);
+      const px = ml + xL * pw, py = mt + ph - (h / maxY) * ph * 0.9;
+      const rh = (h / maxY) * ph * 0.9;
+      ctx.fillStyle = 'rgba(88,166,255,0.18)';
+      ctx.fillRect(px, py, rw, rh);
+      ctx.strokeStyle = 'rgba(88,166,255,0.5)'; ctx.lineWidth = 0.5;
+      ctx.strokeRect(px, py, rw, rh);
+    }
+
+    // Actual curve
+    ctx.beginPath(); ctx.strokeStyle = '#3fb950'; ctx.lineWidth = 2.5;
+    for (let px = 0; px < pw; px++) {
+      const x = px / pw;
+      const y = mt + ph - (f(x) / maxY) * ph * 0.9;
+      px === 0 ? ctx.moveTo(ml+px, y) : ctx.lineTo(ml+px, y);
+    }
+    ctx.stroke();
+
+    // Shaded area (exact)
+    ctx.beginPath(); ctx.fillStyle = 'rgba(63,185,80,0.1)';
+    ctx.moveTo(ml, mt + ph);
+    for (let px = 0; px <= bp * pw; px++) {
+      const x = px / pw;
+      const y = mt + ph - (f(x) / maxY) * ph * 0.9;
+      ctx.lineTo(ml + px, y);
+    }
+    ctx.lineTo(ml + bp * pw, mt + ph); ctx.closePath(); ctx.fill();
+
+    // Axes
+    ctx.strokeStyle = '#2a3040'; ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(ml, mt); ctx.lineTo(ml, mt+ph);
+    ctx.lineTo(ml+pw, mt+ph); ctx.stroke();
+
+    // Exact area (numerical)
+    let exactArea = 0;
+    for (let i = 0; i < 1000; i++) exactArea += f((i+0.5)/1000 * bp) * (bp/1000);
+
+    ctx.fillStyle = '#8b949e'; ctx.font = '10px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('x →', ml + pw/2, H - 4);
+    ctx.fillStyle = '#3fb950'; ctx.font = 'bold 10px sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText(`Exact area ≈ ${exactArea.toFixed(4)}`, ml + 4, mt + 14);
+    ctx.fillStyle = '#58a6ff';
+    ctx.fillText(`Riemann (n=${n}) ≈ ${rArea.toFixed(4)}`, ml + 4, mt + 28);
+
+    document.getElementById('integInfo').textContent =
+      `n=${n} rectangles | Exact: ${exactArea.toFixed(4)} | Riemann: ${rArea.toFixed(4)} | Error: ${Math.abs(exactArea-rArea).toFixed(4)}`;
+  }
+  draw();
+  ['integF','integN','integB'].forEach(id => document.getElementById(id).oninput = draw);
+  document.getElementById('integF').onchange = draw;
+};
+
+// ── Gamma Function ─────────────────────────────────────────
+window.VIS["vGAMMA"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const ml = 35, mr = 15, mt = 20, mb = 25;
+  const pw = W-ml-mr, ph = H-mt-mb;
+
+  function gamma(n) {
+    if (n <= 0) return NaN;
+    if (n < 0.5) return Math.PI / (Math.sin(Math.PI*n) * gamma(1-n));
+    n -= 1;
+    let a = [1,0.99999999999980993,-676.5203681218851,1259.1392167224028,
+             -771.88017343485088,176.61502916214059,-17.019485473090647,
+             1.3076326208963688,-2.6051601714529033e-3];
+    let x = a[0];
+    for (let i = 1; i < 9; i++) x += a[i] / (n + i);
+    const t = n + 7.5;
+    return Math.sqrt(2*Math.PI) * Math.pow(t, n+0.5) * Math.exp(-t) * x;
+  }
+
+  ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, W, H);
+  grid(ctx, W, H);
+
+  const xMin = 0.3, xMax = 5.5;
+  let maxG = 0;
+  for (let i = 1; i <= 200; i++) { const v = gamma(xMin + i/200*(xMax-xMin)); if (isFinite(v) && v < 50) maxG = Math.max(maxG,v); }
+
+  ctx.beginPath(); ctx.strokeStyle = '#bc8cff'; ctx.lineWidth = 2.5; let started = false;
+  for (let px = 0; px < pw; px++) {
+    const x = xMin + (px/pw)*(xMax-xMin);
+    const g = gamma(x);
+    if (!isFinite(g) || g > 50 || g < 0) { started = false; continue; }
+    const py = mt + ph - (g/maxG)*ph*0.9;
+    started ? ctx.lineTo(ml+px, py) : ctx.moveTo(ml+px, py);
+    started = true;
+  }
+  ctx.stroke();
+
+  // Integer points (factorials)
+  for (let n = 1; n <= 5; n++) {
+    const g = gamma(n);
+    const px = ml + ((n - xMin)/(xMax-xMin))*pw;
+    const py = mt + ph - (g/maxG)*ph*0.9;
+    ctx.beginPath(); ctx.arc(px, py, 5, 0, Math.PI*2); ctx.fillStyle = '#f0883e'; ctx.fill();
+    ctx.fillStyle = '#f0883e'; ctx.font = '9px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(`Γ(${n})=${Math.round(g)}`, px, py-10);
+  }
+
+  ctx.strokeStyle = '#2a3040'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(ml,mt); ctx.lineTo(ml,mt+ph); ctx.lineTo(ml+pw,mt+ph); ctx.stroke();
+  ctx.fillStyle = '#8b949e'; ctx.font = '10px sans-serif'; ctx.textAlign = 'center';
+  ctx.fillText('n → (Γ(n) = (n−1)! for integers)', ml+pw/2, H-4);
+};
+
+// ── Volume of Revolution ───────────────────────────────────
+window.VIS["vREV"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+  function draw() {
+    const W = canvas.width, H = canvas.height;
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, W, H);
+    const ang = parseInt(document.getElementById('revAngle').value);
+    document.getElementById('revAngleLbl').textContent = ang + '°';
+    const cx = W * 0.38, cy = H / 2, pw = W * 0.5, ph = H * 0.7;
+
+    // Draw rotated surface using ellipses at each x
+    const nSlices = 40;
+    for (let i = 0; i <= nSlices; i++) {
+      const x = (i / nSlices);
+      const r = 0.3 + 0.5 * x * x; // parabola shape
+      const px = cx - pw * 0.45 + x * pw * 0.9;
+      const ry = r * ph * 0.38;
+      const alpha = 0.04 + i / nSlices * 0.12;
+      ctx.strokeStyle = `rgba(240,136,62,${alpha})`;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.ellipse(px, cy, 4, ry * Math.sin(ang * Math.PI / 180), 0, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+
+    // Profile curve (top)
+    ctx.beginPath(); ctx.strokeStyle = '#f0883e'; ctx.lineWidth = 2.5;
+    for (let px = 0; px <= 200; px++) {
+      const x = px / 200;
+      const r = 0.3 + 0.5 * x * x;
+      const cpx = cx - pw * 0.45 + x * pw * 0.9;
+      const cpy = cy - r * ph * 0.38;
+      px === 0 ? ctx.moveTo(cpx, cpy) : ctx.lineTo(cpx, cpy);
+    }
+    ctx.stroke();
+
+    // Axis
+    ctx.strokeStyle = '#2a3040'; ctx.lineWidth = 1; ctx.setLineDash([4,4]);
+    ctx.beginPath(); ctx.moveTo(cx - pw*0.5, cy); ctx.lineTo(cx + pw*0.5, cy); ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.fillStyle = '#8b949e'; ctx.font = '10px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(`Rotating f(x)=x²+0.3 around x-axis (${ang}°)`, W/2, H - 6);
+    ctx.fillStyle = '#f0883e';
+    ctx.fillText('V = π∫[f(x)]²dx', W/2, 14);
+  }
+  draw();
+  document.getElementById('revAngle').oninput = draw;
+};
+
+// ── Mean Value Theorem ─────────────────────────────────────
+window.VIS["vMVT"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+  let t = 0;
+
+  function draw() {
+    const W = canvas.width, H = canvas.height;
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, W, H);
+    grid(ctx, W, H);
+    const fn = document.getElementById('mvtF').value;
+    const ml=35, mr=15, mt=20, mb=25, pw=W-ml-mr, ph=H-mt-mb;
+    const aX = 0.1, bX = 0.9;
+
+    function f(x) {
+      const xx = x * 4 - 2;
+      if (fn==='sine')  return Math.sin(xx) * 0.8 + 0.5;
+      if (fn==='cubic') return (xx*xx*xx - 3*xx) / 6 + 0.5;
+      return (xx*xx - 2*xx) / 4 + 0.5;
+    }
+    function fLabel() { return fn==='sine'?'sin(x)':fn==='cubic'?'x³−3x':'x²−2x'; }
+
+    // Map data → canvas
+    const map = (x,y) => [ml + x*pw, mt + (1-y)*ph];
+
+    // Draw curve
+    ctx.beginPath(); ctx.strokeStyle = '#58a6ff'; ctx.lineWidth = 2;
+    for (let px = 0; px <= 100; px++) {
+      const x = px/100, [cx,cy] = map(x, f(x));
+      px===0 ? ctx.moveTo(cx,cy) : ctx.lineTo(cx,cy);
+    }
+    ctx.stroke();
+
+    // Secant line (A to B)
+    const fa = f(aX), fb = f(bX);
+    const [ax,ay] = map(aX,fa), [bx,by] = map(bX,fb);
+    ctx.strokeStyle = '#3fb950'; ctx.lineWidth = 1.5;
+    ctx.setLineDash([4,4]);
+    ctx.beginPath(); ctx.moveTo(ax,ay); ctx.lineTo(bx,by); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // A and B points
+    [[aX,fa,'A'],[bX,fb,'B']].forEach(([x,y,nm]) => {
+      const [px,py] = map(x,y);
+      ctx.beginPath(); ctx.arc(px,py,5,0,Math.PI*2); ctx.fillStyle='#3fb950'; ctx.fill();
+      ctx.fillStyle='#3fb950'; ctx.font='bold 10px sans-serif'; ctx.textAlign='center';
+      ctx.fillText(nm,px,py-10);
+    });
+
+    // Animate c point moving along curve
+    const cX = aX + ((bX-aX)/2) * (0.5 + 0.5*Math.cos(t*0.02));
+    const [cpx,cpy] = map(cX, f(cX));
+    const secantSlope = (fb-fa)/(bX-aX);
+    const tlen = 0.12;
+    const [tx1,ty1] = map(cX-tlen, f(cX) - secantSlope*tlen);
+    const [tx2,ty2] = map(cX+tlen, f(cX) + secantSlope*tlen);
+    ctx.strokeStyle = '#f0883e'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(tx1,ty1); ctx.lineTo(tx2,ty2); ctx.stroke();
+    ctx.beginPath(); ctx.arc(cpx,cpy,6,0,Math.PI*2); ctx.fillStyle='#f0883e'; ctx.fill();
+    ctx.fillStyle='#f0883e'; ctx.font='bold 10px sans-serif'; ctx.textAlign='center';
+    ctx.fillText('c',cpx,cpy-12);
+
+    // Labels
+    ctx.fillStyle='#8b949e'; ctx.font='10px sans-serif'; ctx.textAlign='left';
+    ctx.fillText(`f(x) = ${fLabel()}`, ml+4, mt+12);
+    ctx.fillStyle='#3fb950'; ctx.fillText('— Secant slope = [f(b)−f(a)]/(b−a)', ml+4, mt+26);
+    ctx.fillStyle='#f0883e'; ctx.fillText('— Tangent at c (same slope!)', ml+4, mt+40);
+    ctx.fillStyle='#8b949e'; ctx.font='10px sans-serif'; ctx.textAlign='center';
+    ctx.fillText('← MVT: ∃c in (a,b) where tangent ∥ secant', W/2, H-4);
+
+    t++;
+    wrap._animId = requestAnimationFrame(draw);
+  }
+  if (wrap._animId) cancelAnimationFrame(wrap._animId);
+  draw();
+  document.getElementById('mvtF').onchange = () => { cancelAnimationFrame(wrap._animId); draw(); };
+};
+
+// ── Taylor Series ───────────────────────────────────────────
+window.VIS["vTAYLOR"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+  function factorial(n) { let f=1; for(let i=2;i<=n;i++) f*=i; return f; }
+
+  function draw() {
+    const W = canvas.width, H = canvas.height;
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, W, H);
+    grid(ctx, W, H);
+    const fn = document.getElementById('taylorF').value;
+    const N = parseInt(document.getElementById('taylorN').value);
+    document.getElementById('taylorNlbl').textContent = N;
+    const ml=30,mr=15,mt=18,mb=22,pw=W-ml-mr,ph=H-mt-mb;
+    const cx = ml + pw/2, cy = mt + ph/2;
+    const scale = pw/14;
+
+    function exact(x) {
+      if (fn==='sin') return Math.sin(x);
+      if (fn==='cos') return Math.cos(x);
+      return Math.exp(Math.min(x, 3));
+    }
+    function approx(x) {
+      let s = 0;
+      for (let k=0; k<N; k++) {
+        if (fn==='sin' && k%2===1) s += Math.pow(-1,(k-1)/2) * Math.pow(x,k) / factorial(k);
+        else if (fn==='cos' && k%2===0) s += Math.pow(-1,k/2) * Math.pow(x,k) / factorial(k);
+        else if (fn==='ex') s += Math.pow(x,k) / factorial(k);
+      }
+      return s;
+    }
+
+    // Axes
+    ctx.strokeStyle='#2a3040'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(cx,-100); ctx.lineTo(cx,H+100); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(-100,cy); ctx.lineTo(W+100,cy); ctx.stroke();
+
+    // Exact function
+    ctx.beginPath(); ctx.strokeStyle='#58a6ff'; ctx.lineWidth=2;
+    for (let px=0;px<pw;px++) {
+      const x=(px-pw/2)/scale, y=exact(x);
+      const gy=cy-y*scale*0.8;
+      if(gy<mt-20||gy>mt+ph+20){ctx.beginPath();continue;}
+      px===0?ctx.moveTo(ml+px,gy):ctx.lineTo(ml+px,gy);
+    }
+    ctx.stroke();
+
+    // Approximation
+    ctx.beginPath(); ctx.strokeStyle='#f0883e'; ctx.lineWidth=2;
+    for (let px=0;px<pw;px++) {
+      const x=(px-pw/2)/scale, y=approx(x);
+      const gy=cy-y*scale*0.8;
+      if(!isFinite(gy)||gy<mt-50||gy>mt+ph+50){ctx.beginPath();continue;}
+      px===0?ctx.moveTo(ml+px,gy):ctx.lineTo(ml+px,gy);
+    }
+    ctx.stroke();
+
+    ctx.fillStyle='#58a6ff'; ctx.font='10px sans-serif'; ctx.textAlign='left';
+    ctx.fillText(`— Exact: ${fn==='sin'?'sin(x)':fn==='cos'?'cos(x)':'eˣ'}`, ml+4, mt+12);
+    ctx.fillStyle='#f0883e';
+    ctx.fillText(`— Taylor approx (${N} terms)`, ml+4, mt+26);
+    ctx.fillStyle='#8b949e'; ctx.textAlign='center';
+    ctx.fillText('More terms = better fit!', W/2, H-4);
+  }
+  draw();
+  document.getElementById('taylorF').onchange = draw;
+  document.getElementById('taylorN').oninput = draw;
+};
+
+// ── Maxima / Minima ─────────────────────────────────────────
+window.VIS["vMAXMIN"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+  function draw() {
+    const W = canvas.width, H = canvas.height;
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, W, H);
+    grid(ctx, W, H);
+    const a = parseInt(document.getElementById('mmA').value) / 10;
+    const tx = parseInt(document.getElementById('mmX').value) / 40;
+    const ml=30,mr=15,mt=18,mb=22,pw=W-ml-mr,ph=H-mt-mb;
+    const cx=ml+pw/2, cy=mt+ph/2, sc=pw/4;
+
+    function f(x)  { return a*x*x/2 - x*x*x/3; }
+    function df(x) { return a*x - x*x; }
+
+    // Find max/min: df = x(a-x) = 0 → x=0 or x=a
+    const crits = [0, a];
+
+    ctx.strokeStyle='#2a3040'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(cx,mt-10); ctx.lineTo(cx,mt+ph+10); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(ml-10,cy); ctx.lineTo(ml+pw+10,cy); ctx.stroke();
+
+    // Curve
+    ctx.beginPath(); ctx.strokeStyle='#58a6ff'; ctx.lineWidth=2.5; let s=false;
+    for (let px=0;px<pw;px++) {
+      const x=(px-pw/2)/sc, y=f(x);
+      const gy=cy-y*sc*0.5;
+      if(gy<mt-20||gy>mt+ph+20){s=false;continue;}
+      s?ctx.lineTo(ml+px,gy):ctx.moveTo(ml+px,gy);s=true;
+    }
+    ctx.stroke();
+
+    // Critical points
+    crits.forEach(xc => {
+      const yc=f(xc);
+      const px=cx+xc*sc, py=cy-yc*sc*0.5;
+      if(py<mt||py>mt+ph) return;
+      const d2=a-2*xc;
+      const isMax=d2<0;
+      ctx.beginPath(); ctx.arc(px,py,7,0,Math.PI*2);
+      ctx.fillStyle=isMax?'#f85149':'#3fb950'; ctx.fill();
+      ctx.fillStyle=isMax?'#f85149':'#3fb950';
+      ctx.font='bold 9px sans-serif'; ctx.textAlign='center';
+      ctx.fillText(isMax?'MAX':'MIN',px,py+(isMax?-12:14));
+      // Horizontal tangent
+      ctx.strokeStyle=isMax?'rgba(248,81,73,0.5)':'rgba(63,185,80,0.5)';
+      ctx.lineWidth=1; ctx.setLineDash([4,3]);
+      ctx.beginPath(); ctx.moveTo(px-25,py); ctx.lineTo(px+25,py); ctx.stroke();
+      ctx.setLineDash([]);
+    });
+
+    // User tangent
+    const xt=tx, yt=f(xt), slope=df(xt);
+    const tpx=cx+xt*sc, tpy=cy-yt*sc*0.5;
+    if(tpy>mt&&tpy<mt+ph) {
+      const tlen=30;
+      ctx.strokeStyle='#f0883e'; ctx.lineWidth=1.5;
+      ctx.beginPath(); ctx.moveTo(tpx-tlen,tpy+slope*tlen*0.5); ctx.lineTo(tpx+tlen,tpy-slope*tlen*0.5); ctx.stroke();
+      ctx.beginPath(); ctx.arc(tpx,tpy,4,0,Math.PI*2); ctx.fillStyle='#f0883e'; ctx.fill();
+      ctx.fillStyle='#f0883e'; ctx.font='9px sans-serif'; ctx.textAlign='left';
+      ctx.fillText(`slope=${df(xt).toFixed(2)}`,tpx+6,tpy-5);
+    }
+
+    ctx.fillStyle='#8b949e'; ctx.font='9px sans-serif'; ctx.textAlign='center';
+    ctx.fillText('f\'(x)=0 at MAX/MIN → horizontal tangent', W/2, H-4);
+  }
+  draw();
+  document.getElementById('mmA').oninput = draw;
+  document.getElementById('mmX').oninput = draw;
+};
+
+// ── Gauss Row Reduction (animated) ─────────────────────────
+window.VIS["vGAUSS"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, W, H);
+
+  // Show example 3x3 augmented matrix
+  const steps = [
+  { label: 'Original matrix [A|b]', mat: [[2,1,-1,8],[-3,-1,2,-11],[-2,1,2,-3]] },
+  { label: 'R2 ← R2 + (3/2)R1', mat: [[2,1,-1,8],[0,0.5,0.5,1],[-2,1,2,-3]] },
+    { label: 'R3 ← R3 + R1',      mat: [[2,1,-1,8],[0,0.5,0.5,1],[0,2,1,5]] },
+    { label: 'R3 ← R3 − 4R2',     mat: [[2,1,-1,8],[0,0.5,0.5,1],[0,0,-1,1]] },
+    { label: 'Back-substitute: x=2, y=3, z=-1', mat: [[1,0,0,2],[0,1,0,3],[0,0,1,-1]] },
+  ];
+
+  let step = 0;
+  function drawStep() {
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, W, H);
+    const s = steps[step];
+    const cellW = (W - 40) / 4, cellH = 36;
+    const startX = 20, startY = 50;
+
+    ctx.fillStyle = '#58a6ff'; ctx.font = 'bold 11px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(`Step ${step+1}: ${s.label}`, W/2, 20);
+
+    s.mat.forEach((row, ri) => {
+      row.forEach((val, ci) => {
+        const cx2 = startX + ci * cellW + cellW/2;
+        const cy2 = startY + ri * cellH + cellH/2;
+        const bg = val === 0 ? 'rgba(63,185,80,0.1)' : val === 1 ? 'rgba(88,166,255,0.15)' : 'var(--surface2)';
+        ctx.fillStyle = bg; ctx.fillRect(startX+ci*cellW+2, startY+ri*cellH+2, cellW-4, cellH-4);
+        ctx.strokeStyle = '#30363d'; ctx.lineWidth=0.5; ctx.strokeRect(startX+ci*cellW+2, startY+ri*cellH+2, cellW-4, cellH-4);
+        ctx.fillStyle = val === 0 ? '#3fb950' : '#e6edf3';
+        ctx.font = `${Math.abs(val) === 1 ? 'bold' : ''} 12px 'JetBrains Mono',monospace`;
+        ctx.textAlign = 'center';
+        ctx.fillText(Number.isInteger(val) ? val : val.toFixed(1), cx2, cy2+4);
+      });
+    });
+
+    ctx.fillStyle='#8b949e'; ctx.font='10px sans-serif'; ctx.textAlign='center';
+    ctx.fillText(`(${step+1}/${steps.length}) Tap to continue`, W/2, H-8);
+  }
+  drawStep();
+  canvas.onclick = () => { step = (step + 1) % steps.length; drawStep(); };
+  canvas.style.cursor = 'pointer';
+};
+
+// ── Matrix Transformation (shapes) ─────────────────────────
+window.VIS["vTRANSF"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+  function draw() {
+    const W = canvas.width, H = canvas.height;
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, W, H);
+    grid(ctx, W, H);
+    const type = document.getElementById('transfT').value;
+    const p = parseInt(document.getElementById('transfP').value) / 100;
+    const cx = W/2, cy = H/2, sc = Math.min(W,H) * 0.2;
+
+    const I = [[1,0],[0,1]];
+    let M;
+    const angle = p * Math.PI/2;
+    if (type==='rot')     M = [[Math.cos(angle), -Math.sin(angle)],[Math.sin(angle), Math.cos(angle)]];
+    else if (type==='scale') M = [[1+p, 0],[0, 1-p*0.5]];
+    else if (type==='shear') M = [[1, p*1.5],[0, 1]];
+    else M = [[-p+(1-p), 0],[0, 1]]; // reflect
+
+    function lerp(a,b,t2){ return [[a[0][0]*(1-t2)+b[0][0]*t2, a[0][1]*(1-t2)+b[0][1]*t2], [a[1][0]*(1-t2)+b[1][0]*t2, a[1][1]*(1-t2)+b[1][1]*t2]]; }
+    const mat = lerp(I, M, p);
+
+    function transform(x, y) {
+      return [cx + (mat[0][0]*x + mat[0][1]*y)*sc, cy - (mat[1][0]*x + mat[1][1]*y)*sc];
+    }
+
+    // Original shape (unit square)
+    const orig = [[0,0],[1,0],[1,1],[0,1]];
+    ctx.beginPath(); ctx.strokeStyle='rgba(88,166,255,0.4)'; ctx.lineWidth=1.5; ctx.setLineDash([4,3]);
+    orig.forEach(([x,y],i)=>{
+      const [px,py]=[cx+x*sc,cy-y*sc];
+      i===0?ctx.moveTo(px,py):ctx.lineTo(px,py);
+    });
+    ctx.closePath(); ctx.stroke(); ctx.setLineDash([]);
+
+    // Transformed shape
+    ctx.beginPath(); ctx.strokeStyle='#f0883e'; ctx.fillStyle='rgba(240,136,62,0.12)'; ctx.lineWidth=2;
+    orig.forEach(([x,y],i)=>{
+      const [px,py]=transform(x,y);
+      i===0?ctx.moveTo(px,py):ctx.lineTo(px,py);
+    });
+    ctx.closePath(); ctx.stroke(); ctx.fill();
+
+    // Basis vectors
+    arrow(ctx, cx, cy, ...transform(1,0), '#f0883e', 2);
+    arrow(ctx, cx, cy, ...transform(0,1), '#3fb950', 2);
+
+    // Axes
+    ctx.strokeStyle='#2a3040'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(cx-sc*2,cy); ctx.lineTo(cx+sc*2,cy); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx,cy-sc*2); ctx.lineTo(cx,cy+sc*2); ctx.stroke();
+
+    ctx.fillStyle='#8b949e'; ctx.font='10px sans-serif'; ctx.textAlign='center';
+    ctx.fillText(`Blue=original | Orange=transformed (t=${(p*100).toFixed(0)}%)`, W/2, H-5);
+    ctx.fillStyle='#f0883e'; ctx.fillText(`Matrix: [[${mat[0][0].toFixed(1)},${mat[0][1].toFixed(1)}],[${mat[1][0].toFixed(1)},${mat[1][1].toFixed(1)}]]`, W/2, 14);
+  }
+  draw();
+  document.getElementById('transfT').onchange = draw;
+  document.getElementById('transfP').oninput = draw;
+};
+
+// ── Gram-Schmidt ─────────────────────────────────────────────
+window.VIS["vGS"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W*0.4, cy = H*0.55, sc = Math.min(W,H)*0.28;
+  let t = 0;
+
+  function frame() {
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, W, H);
+    grid(ctx, W, H);
+
+    // Original vectors v1, v2
+    const v1 = [1, 0.3], v2 = [0.6, 0.9];
+    // u1 = v1
+    const u1 = [...v1];
+    // u2 = v2 - proj(v2 onto u1)
+    const dot12 = v2[0]*u1[0]+v2[1]*u1[1];
+    const mag1sq = u1[0]*u1[0]+u1[1]*u1[1];
+    const proj = [dot12/mag1sq*u1[0], dot12/mag1sq*u1[1]];
+    const u2 = [v2[0]-proj[0], v2[1]-proj[1]];
+
+    const phase = Math.min(1, (t % 200) / 100);
+
+    // v1
+    arrow(ctx, cx, cy, cx+v1[0]*sc, cy-v1[1]*sc, 'rgba(88,166,255,0.5)', 2);
+    // v2
+    arrow(ctx, cx, cy, cx+v2[0]*sc, cy-v2[1]*sc, 'rgba(248,81,73,0.5)', 2);
+
+    // Projection (appears first)
+    if (phase > 0.1) {
+      arrow(ctx, cx, cy, cx+proj[0]*sc*phase, cy-proj[1]*sc*phase, 'rgba(240,136,62,0.7)', 1.5);
+      ctx.fillStyle='#f0883e'; ctx.font='9px sans-serif'; ctx.textAlign='center';
+      ctx.fillText('proj', cx+proj[0]*sc*phase/2, cy-proj[1]*sc*phase/2-6);
+    }
+
+    // Orthogonal vector appears
+    if (phase > 0.5) {
+      const ph2 = Math.min(1, (phase-0.5)*2);
+      arrow(ctx, cx, cy, cx+u2[0]*sc*ph2, cy-u2[1]*sc*ph2, '#3fb950', 2.5);
+      ctx.fillStyle='#3fb950'; ctx.font='bold 10px sans-serif'; ctx.textAlign='center';
+      ctx.fillText('u₂ ⊥ u₁ ✓', cx+u2[0]*sc*ph2*0.6, cy-u2[1]*sc*ph2*0.6-10);
+    }
+
+    // Labels
+    ctx.fillStyle='#58a6ff'; ctx.font='10px sans-serif'; ctx.textAlign='left';
+    ctx.fillText('→ v₁ (original)', cx+v1[0]*sc+5, cy-v1[1]*sc);
+    ctx.fillStyle='#f85149'; ctx.fillText('→ v₂ (original)', cx+v2[0]*sc+5, cy-v2[1]*sc);
+    ctx.fillStyle='#3fb950'; ctx.fillText('→ u₂ = v₂ − proj (orthogonal!)', cx+u2[0]*sc+5, cy-u2[1]*sc);
+    ctx.fillStyle='#8b949e'; ctx.font='10px sans-serif'; ctx.textAlign='center';
+    ctx.fillText('Gram-Schmidt: subtract projection → get ⊥ vector', W/2, H-5);
+
+    t++;
+    wrap._animId = requestAnimationFrame(frame);
+  }
+  if (wrap._animId) cancelAnimationFrame(wrap._animId);
+  frame();
+};
+
+// ── Eigenvalue Visualization ────────────────────────────────
+window.VIS["vEIGEN"] = function(canvas, wrap) {
+  const ctx = canvas.getContext('2d');
+
+  function draw() {
+    const W = canvas.width, H = canvas.height;
+    ctx.fillStyle = '#060a10'; ctx.fillRect(0, 0, W, H);
+    grid(ctx, W, H);
+    const a = parseInt(document.getElementById('eigA').value)/10;
+    const b = parseInt(document.getElementById('eigB').value)/10;
+    const d = parseInt(document.getElementById('eigD').value)/10;
+    const t2= parseInt(document.getElementById('eigT').value)/100;
+    const cx=W/2, cy=H/2, sc=Math.min(W,H)*0.18;
+
+    function transform(x, y) {
+      const tx = (1-t2)*x + t2*(a*x + b*y);
+      const ty = (1-t2)*y + t2*(0*x + d*y);
+      return [cx + tx*sc, cy - ty*sc];
+    }
+
+    // Draw unit circle (all vectors)
+    ctx.beginPath(); ctx.strokeStyle='rgba(255,255,255,0.06)'; ctx.lineWidth=1;
+    for (let i=0;i<=360;i+=5) {
+      const x=Math.cos(i*Math.PI/180), y=Math.sin(i*Math.PI/180);
+      const [px,py]=transform(x,y);
+      i===0?ctx.moveTo(px,py):ctx.lineTo(px,py);
+    }
+    ctx.closePath(); ctx.stroke();
+
+    // Many transformed vectors (faded)
+    for (let i=0;i<24;i++) {
+      const ang = i/24 * Math.PI*2;
+      const x=Math.cos(ang), y=Math.sin(ang);
+      const [px,py]=transform(x,y);
+      arrow(ctx, cx,cy,px,py,'rgba(88,166,255,0.2)',1);
+    }
+
+    // Eigenvectors (if real)
+    const trace=a+d, det=a*d-b*0;
+    const disc=trace*trace-4*det;
+    if (disc>=0) {
+      const l1=(trace+Math.sqrt(disc))/2, l2=(trace-Math.sqrt(disc))/2;
+      // Eigenvectors for upper triangular: v1=[1,0], v2=[b,l2-a] or [1,0]
+      const evecs = [
+        { v: [1, 0], l: l1, col: '#f0883e' },
+        { v: [b, l2-a], l: l2, col: '#3fb950' },
+      ];
+      evecs.forEach(({v, l, col}) => {
+        const mag = Math.sqrt(v[0]*v[0]+v[1]*v[1]);
+        if(mag < 0.001) return;
+        const nx=v[0]/mag, ny=v[1]/mag;
+        const [px,py]=transform(nx,ny);
+        arrow(ctx, cx,cy,px,py,col,3);
+        // Original direction (if not transformed)
+        arrow(ctx, cx,cy, cx+nx*sc, cy-ny*sc, col+'80', 2);
+        ctx.fillStyle=col; ctx.font='bold 10px sans-serif'; ctx.textAlign='center';
+        ctx.fillText(`λ=${l.toFixed(1)}`,px+(px-cx)*0.2,py+(py-cy)*0.2);
+      });
+
+      document.getElementById('eigenInfo').textContent =
+        `λ₁=${l1.toFixed(2)}, λ₂=${l2.toFixed(2)} | trace=${trace.toFixed(1)}, det=${det.toFixed(1)}`;
+    } else {
+      document.getElementById('eigenInfo').textContent = 'Complex eigenvalues (no real eigenvectors)';
+    }
+
+    // Axes
+    ctx.strokeStyle='#2a3040'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(cx-sc*2,cy); ctx.lineTo(cx+sc*2,cy); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx,cy-sc*2); ctx.lineTo(cx,cy+sc*2); ctx.stroke();
+
+    ctx.fillStyle='#8b949e'; ctx.font='10px sans-serif'; ctx.textAlign='center';
+    ctx.fillText('Eigenvectors (coloured) only STRETCH, never rotate!', W/2, H-5);
+    ctx.fillText(`A = [[${a},${b}],[0,${d}]]`, W/2, 14);
+  }
+  draw();
+  ['eigA','eigB','eigD','eigT'].forEach(id => document.getElementById(id).oninput = draw);
+};
+
+// ══════════════════════════════════════
+//  QUIZZES
+// ══════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  runQuiz('qINTEG', [
+    { q: '∫ x³ dx = ?', opts: ['x⁴+C', 'x⁴/4+C', '3x²+C', 'x²/2+C'], a: 1, exp: '∫xⁿdx = xⁿ⁺¹/(n+1)+C → x⁴/4+C' },
+    { q: '∫₀¹ x dx = ?', opts: ['1', '1/2', '2', '1/4'], a: 1, exp: '[x²/2]₀¹ = 1/2 − 0 = 1/2' },
+    { q: 'Integration by Parts: ∫u dv = ?', opts: ['uv+∫vdu', 'uv−∫vdu', 'udv+vdu', '∫u+∫v'], a: 1, exp: '∫u dv = uv − ∫v du (remember: choose u carefully)' },
+  ]);
+  runQuiz('qDIFF', [
+    { q: 'Rolle\'s theorem requires f(a) = f(b) and:', opts: ['f monotonic', '∃c: f\'(c)=0', 'f(c)=0', 'f continuous only'], a: 1, exp: 'Rolle\'s: f(a)=f(b) → ∃c where f\'(c)=0 (horizontal tangent)' },
+    { q: 'f\'(c) < 0 at critical point → ?', opts: ['Local min', 'Local max', 'Inflection', 'Global max'], a: 1, exp: 'f\'\'(c) < 0 → concave down → local MAXIMUM' },
+  ]);
+  runQuiz('qVEC', [
+    { q: 'Basis of ℝ² has how many vectors?', opts: ['1', '2', '3', 'any number'], a: 1, exp: 'dim(ℝ²) = 2, so basis has exactly 2 linearly independent vectors' },
+    { q: 'Rank-Nullity theorem: rank + nullity = ?', opts: ['m (rows)', 'n (cols)', 'det(A)', '0'], a: 1, exp: 'For A: m×n, rank(A) + nullity(A) = n (number of columns)' },
+  ]);
+  runQuiz('qEIGEN', [
+    { q: 'Eigenvalues from:', opts: ['det(A+λI)=0', 'det(A−λI)=0', 'trace(A)=λ', 'A·v=0'], a: 1, exp: 'Characteristic equation: det(A − λI) = 0' },
+    { q: 'For A=[[2,0],[0,3]], eigenvalues are:', opts: ['1,1', '2,3', '0,1', '5,6'], a: 1, exp: 'Diagonal matrix → eigenvalues = diagonal entries = 2 and 3' },
+    { q: 'Trace of A = λ₁+λ₂ equals:', opts: ['a₁₁+a₂₂', 'det(A)', 'a₁₂+a₂₁', '0'], a: 0, exp: 'trace = sum of diagonal elements = sum of eigenvalues' },
+  ]);
+});
+</script>
+</body>
+</html>
